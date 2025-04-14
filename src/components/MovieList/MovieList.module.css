@@ -1,0 +1,25 @@
+.movieList {
+    display: grid;
+    grid-template-columns: repeat(3, 240px);
+    gap: 8px;
+    justify-content: center;
+    padding: 16px;
+}
+
+.movieItem {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.movieItem button {
+    width: 42px;
+    height: 42px;
+}
+
+.movieItem:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+}

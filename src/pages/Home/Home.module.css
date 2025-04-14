@@ -1,0 +1,29 @@
+.home {
+    min-height: 100vh;
+}
+
+header {
+    background-color: antiquewhite;
+    padding: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.addMovieButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    padding: 16px;
+    cursor: pointer;
+}
