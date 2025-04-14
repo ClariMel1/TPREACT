@@ -1,11 +1,11 @@
-import { Camera, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import MovieList from "../../components/MovieList/MovieList";
 import Title from "../../components/Title/Title"
 import { useMovies } from "../../hooks/useMovies";
 import styles from "./Home.module.css"
 
 export default function Home() {
-    const { movies, addMovie, removeMovie } = useMovies()
+    const { movies, addMovie, removeMovie, countMovies } = useMovies()
 
     const handleAddMovie = () => {
         const newMovie = {
@@ -33,7 +33,13 @@ export default function Home() {
             <header>
                 <Title text={"Home"} />
             </header>
-            <MovieList movies={movies} onDeleteMovie={handleDeleteMovie} onEditMovie={handleEditMovie} />
+            {countMovies > 0 ? (
+                <MovieList movies={movies} onDeleteMovie={handleDeleteMovie} onEditMovie={handleEditMovie} />
+            ) : (
+                <div className={styles.emptyMovies}>
+                    <h2>No hay peliculas ni series</h2>
+                </div>
+            )}
             <button className={styles.addMovieButton} onClick={handleAddMovie}><Plus /></button>
         </section>
     )

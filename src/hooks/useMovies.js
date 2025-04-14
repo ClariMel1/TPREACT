@@ -19,5 +19,7 @@ export const useMovies = () => {
         setMovies(db.getLocalMovies());
     }
 
-    return { movies, addMovie, removeMovie, updateMovie };
+    const countMovies = movies.length;
+
+    return { movies, addMovie, removeMovie, updateMovie, countMovies };
 }
