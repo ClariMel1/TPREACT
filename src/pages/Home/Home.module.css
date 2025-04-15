@@ -1,11 +1,14 @@
 .home {
     display: grid;
+    grid-template-columns: 200px 1fr;
     grid-template-rows: auto 1fr;
     min-height: 100vh;
 }
 
 header {
-    background-color: antiquewhite;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    background-color: rgb(8, 8, 8, 0.5);
     padding: 16px;
     position: sticky;
     top: 0;
@@ -13,6 +16,7 @@ header {
     display: flex;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .emptyMovies {
@@ -31,7 +35,7 @@ header {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff;
+    background-color: #8a0000;
     color: white;
     border: none;
     border-radius: 100%;

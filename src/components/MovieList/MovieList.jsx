@@ -1,21 +1,12 @@
 import { Pencil, Trash } from "lucide-react";
 import styles from "./MovieList.module.css"
+import MovieItem from "../MovieItem/MovieItem";
 
-export default function MovieList({ movies, onDeleteMovie, onEditMovie }) {
+export default function MovieList({ movies, onClickMovie }) {
     return (
         <section className={styles.movieList}>
             {movies.map((movie) => (
-                <article key={movie.id} className={styles.movieItem}>
-                    <h2>{movie.title}</h2>
-                    <p><strong>Director: </strong>{movie.director}</p>
-                    <p><strong>Gender: </strong>{movie.gender}</p>
-                    <p><strong>Year: </strong>{movie.year}</p>
-                    <p><strong>Rating: </strong>{movie.rating}</p>
-                    <p><strong>Type: </strong>{movie.type}</p>
-                    
-                    <button onClick={() => {onEditMovie(movie.id)}}><Pencil /></button>
-                    <button onClick={() => {onDeleteMovie(movie.id)}}><Trash /></button>
-                </article>
+                <MovieItem movie={movie} key={movie.id} onClick={onClickMovie} />
             ))}
         </section>
     );

@@ -1,0 +1,10 @@
+:root {
+    color-scheme: dark;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    background-color: gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(8, 8, 8, 1) 100%);
+    color: #e0e0e0;
+}

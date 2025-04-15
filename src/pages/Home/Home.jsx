@@ -3,44 +3,46 @@ import MovieList from "../../components/MovieList/MovieList";
 import Title from "../../components/Title/Title"
 import { useMovies } from "../../hooks/useMovies";
 import styles from "./Home.module.css"
+import Filters from "../../components/Filters/Filters";
+import AddMovieForm from "../../components/AddMovieForm/AddMovieForm";
+import { useState } from "react";
 
 export default function Home() {
-    const { movies, addMovie, removeMovie, countMovies } = useMovies()
+    const { movies, addMovie, countMovies } = useMovies()
+    const [addMovieVisible, setAddMovieVisible] = useState(false)
 
-    const handleAddMovie = () => {
-        const newMovie = {
-            id: 1,
-            title: "Inception",
-            director: "Christopher Nolan",
-            year: 2010,
-            gender: "Sci-Fi",
-            rating: 8.8,
-            type: "movie"
-        }
-        addMovie(newMovie)
+    const handleAddMovie = (movie) => {
+        addMovie(movie)
     }
 
-    const handleDeleteMovie = (id) => {
-        removeMovie(id)
+    const handleClickMovie = (id) => {
+        console.log("Movie clicked:", id)
     }
 
-    const handleEditMovie = (id) => {
-        // TODO: Logic to edit a movie by id
+    const showAddMovieForm = () => {
+        setAddMovieVisible(true)
+    }
+
+    const hideAddMovieForm = () => {
+        setAddMovieVisible(false)
     }
 
     return (
         <section className={styles.home}>
             <header>
-                <Title text={"Home"} />
+                <Title text={"Mis Pelis y Series"} />
             </header>
+            <Filters onFilterChange={() => {}} />
+            {addMovieVisible && <AddMovieForm onAddMovie={handleAddMovie} onClose={hideAddMovieForm}/>}
+
             {countMovies > 0 ? (
-                <MovieList movies={movies} onDeleteMovie={handleDeleteMovie} onEditMovie={handleEditMovie} />
+                <MovieList movies={movies} onClickMovie={handleClickMovie} />
             ) : (
                 <div className={styles.emptyMovies}>
                     <h2>No hay peliculas ni series</h2>
                 </div>
             )}
-            <button className={styles.addMovieButton} onClick={handleAddMovie}><Plus /></button>
+            <button className={styles.addMovieButton} onClick={showAddMovieForm}><Plus /></button>
         </section>
     )
 }

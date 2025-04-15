@@ -1,0 +1,41 @@
+.movieItem {
+    border: 1px solid #292929;
+}
+
+.movieItem img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
+
+.movieDetails {
+    padding: 0 16px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.movieTitle {
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e0e0e0;
+    margin: 8px 0;
+}
+
+.movieDetail {
+    color: #464646;
+    font-weight: 500;
+}
+
+.movieItem button {
+    width: 42px;
+    height: 42px;
+}
+
+.movieItem:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
