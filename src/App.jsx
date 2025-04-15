@@ -1,12 +1,11 @@
-import './App.css';
-import Home from './pages/Home/home';
+import Home from './pages/Home/Home';
+
 function App() {
   return (
     <div>
-      <h1>TP React | PWA</h1>
       <Home />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
