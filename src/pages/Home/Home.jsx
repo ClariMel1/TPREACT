@@ -8,11 +8,16 @@ import AddMovieForm from "../../components/AddMovieForm/AddMovieForm";
 import { useState } from "react";
 
 export default function Home() {
-    const { movies, addMovie, countMovies } = useMovies()
+    const { movies, addMovie } = useMovies()
     const [addMovieVisible, setAddMovieVisible] = useState(false)
 
-    const handleAddMovie = (movie) => {
-        addMovie(movie)
+    const [ filteredMovies, setFilteredMovies ] = useState(movies)
+
+    const handleFilterChange = (query) => {
+        const filtered = movies.filter((movie) => {
+            return movie.title.toLowerCase().includes(query.toLowerCase())
+        })
+        setFilteredMovies(filtered)
     }
 
     const handleClickMovie = (id) => {
@@ -32,11 +37,11 @@ export default function Home() {
             <header>
                 <Title text={"Mis Pelis y Series"} />
             </header>
-            <Filters onFilterChange={() => {}} />
-            {addMovieVisible && <AddMovieForm onAddMovie={handleAddMovie} onClose={hideAddMovieForm}/>}
+            <Filters onFilterChange={handleFilterChange} />
+            {addMovieVisible && <AddMovieForm onAddMovie={addMovie} onClose={hideAddMovieForm}/>}
 
-            {countMovies > 0 ? (
-                <MovieList movies={movies} onClickMovie={handleClickMovie} />
+            {filteredMovies.length > 0 ? (
+                <MovieList movies={filteredMovies} onClickMovie={handleClickMovie} />
             ) : (
                 <div className={styles.emptyMovies}>
                     <h2>No hay peliculas ni series</h2>

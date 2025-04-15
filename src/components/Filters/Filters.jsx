@@ -1,57 +1,48 @@
-import React, { useState } from 'react';
+import Search from '../Search/Search';
+import styles from './Filters.module.css';
 
-const Filters = ({ onFilterChange }) => {
-    const [search, setSearch] = useState('');
-    const [genre, setGenre] = useState('');
-    const [rating, setRating] = useState('');
-
-    const handleFilterChange = () => {
-        onFilterChange({ search, genre, rating });
-    };
-
+export default function Filters({ onFilterChange }) {
     return (
-        <div className="filters">
-            <h2>Filtrar Películas</h2>
-            <div>
-                <label htmlFor="search">Buscar:</label>
-                <input
-                    type="text"
-                    id="search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Título de la película"
-                />
-            </div>
-            <div>
-                <label htmlFor="genre">Género:</label>
-                <select
-                    id="genre"
-                    value={genre}
-                    onChange={(e) => setGenre(e.target.value)}
-                >
+        <div className={styles.filters}>
+            <Search onSearch={onFilterChange} />
+            <h2>Filtros</h2>
+            <div className={styles.filterOptions}>
+                <label>Genero:</label>
+                <select onChange={(e) => onFilterChange(e.target.value)}>
                     <option value="">Todos</option>
-                    <option value="action">Acción</option>
-                    <option value="comedy">Comedia</option>
-                    <option value="drama">Drama</option>
-                    <option value="horror">Terror</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Comedia">Comedia</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Ciencia Ficción">Ciencia Ficción</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Suspenso">Suspenso</option>
+                    <option value="fantFantasíaasy">Fantasía</option>
+                    <option value="Documental">Documental</option>
+                    <option value="Animación">Animación</option>
+                    <option value="Aventura">Aventura</option>
                 </select>
-            </div>
-            <div>
-                <label htmlFor="rating">Calificación:</label>
-                <select
-                    id="rating"
-                    value={rating}
-                    onChange={(e) => setRating(e.target.value)}
-                >
-                    <option value="">Todas</option>
-                    <option value="5">5 estrellas</option>
-                    <option value="4">4 estrellas o más</option>
-                    <option value="3">3 estrellas o más</option>
+                <label>Tipo:</label>
+                <select onChange={(e) => onFilterChange(e.target.value)}>
+                    <option value="">Todos</option>
+                    <option value="movie">Película</option>
+                    <option value="series">Serie</option>
                 </select>
+                <label>Año:</label>
+                <select onChange={(e) => onFilterChange(e.target.value)}>
+                    <option value="">Todos</option>
+                    {Array.from({ length: 123 }, (_, i) => 2025 - i).map((year) => (
+                        <option key={year} value={year}>{year}</option>
+                    ))}
+                </select>
+                <label>Rating:</label>
+                <select onChange={(e) => onFilterChange(e.target.value)}>
+                    <option value="">Todos</option>
+                    {Array.from({ length: 5 }, (_, i) => i + 1).map((rating) => (
+                        <option key={rating} value={rating}>{rating}</option>
+                    ))}
+                </select>                
             </div>
-            <button onClick={handleFilterChange}>Aplicar Filtros</button>
         </div>
     );
-};
-
-export default Filters;
+}

@@ -31,24 +31,24 @@ export default function AddMovie({ onAddMovie, onClose }) {
                     <input type="url" id="image" name="image" required />
                     <label htmlFor="type">Tipo:</label>
                     <select id="type" name="type" required>
-                        <option value="Movie">Película</option>
+                        <option value="Pelicula">Película</option>
                         <option value="Serie">Serie</option>
                     </select>
                     <label htmlFor="director">Director:</label>
                     <input type="text" id="director" name="director" required />
                     <label htmlFor="genre">Género:</label>
                     <select id="genre" name="genre" required>
-                        <option value="action">Acción</option>
-                        <option value="comedy">Comedia</option>
-                        <option value="drama">Drama</option>
-                        <option value="horror">Terror</option>
-                        <option value="sci-fi">Ciencia Ficción</option>
-                        <option value="romance">Romance</option>
-                        <option value="thriller">Suspenso</option>
-                        <option value="fantasy">Fantasía</option>
-                        <option value="documentary">Documental</option>
-                        <option value="animation">Animación</option>
-                        <option value="adventure">Aventura</option>
+                        <option value="Acción">Acción</option>
+                        <option value="Comedia">Comedia</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Ciencia Ficción">Ciencia Ficción</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Suspenso">Suspenso</option>
+                        <option value="fantFantasíaasy">Fantasía</option>
+                        <option value="Documental">Documental</option>
+                        <option value="Animación">Animación</option>
+                        <option value="Aventura">Aventura</option>
                     </select>
                     <label htmlFor="year">Año:</label>
                     <input type="number" id="year" name="year" min="1900" required />
