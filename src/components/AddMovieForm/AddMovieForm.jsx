@@ -13,6 +13,7 @@ export default function AddMovie({ onAddMovie, onClose }) {
             genre: formData.get("genre"),
             year: parseInt(formData.get("year"), 10),
             rating: parseFloat(formData.get("rating")),
+            seen: formData.get("seen") === "on",
         };
         onAddMovie(newMovie);
         onClose();
@@ -31,7 +32,7 @@ export default function AddMovie({ onAddMovie, onClose }) {
                     <input type="url" id="image" name="image" required />
                     <label htmlFor="type">Tipo:</label>
                     <select id="type" name="type" required>
-                        <option value="Pelicula">Película</option>
+                        <option value="Película">Película</option>
                         <option value="Serie">Serie</option>
                     </select>
                     <label htmlFor="director">Director:</label>
@@ -54,6 +55,8 @@ export default function AddMovie({ onAddMovie, onClose }) {
                     <input type="number" id="year" name="year" min="1900" required />
                     <label htmlFor="rating">Rating:</label>
                     <input type="range" id="rating" name="rating" min="1" max="5" required />
+                    <label htmlFor="seen">¿La viste?</label>
+                    <input type="checkbox" name="seen" id="seen" />
                     <button type="submit">Aceptar</button>
                 </form>
             </div>

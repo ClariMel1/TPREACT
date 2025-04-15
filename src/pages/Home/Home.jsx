@@ -5,19 +5,29 @@ import { useMovies } from "../../hooks/useMovies";
 import styles from "./Home.module.css"
 import Filters from "../../components/Filters/Filters";
 import AddMovieForm from "../../components/AddMovieForm/AddMovieForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
     const { movies, addMovie } = useMovies()
     const [addMovieVisible, setAddMovieVisible] = useState(false)
-
     const [ filteredMovies, setFilteredMovies ] = useState(movies)
 
-    const handleFilterChange = (query) => {
-        const filtered = movies.filter((movie) => {
-            return movie.title.toLowerCase().includes(query.toLowerCase())
-        })
-        setFilteredMovies(filtered)
+    useEffect(() => {
+        setFilteredMovies(movies)
+    }
+    , [movies])
+
+    const handleFilterChange = (filters) => {
+        const { search, genre, type, year, rating } = filters
+
+        const filteredMovies = movies.filter((movie) => {
+            return movie.title.toLowerCase().includes(search.toLowerCase()) &&
+                (genre ? movie.genre === genre : true) &&
+                (type ? movie.type === type : true) &&
+                (year ? movie.year === +year : true) &&
+                (rating ? movie.rating === +rating : true)
+        })        
+        setFilteredMovies(filteredMovies)
     }
 
     const handleClickMovie = (id) => {

@@ -16,7 +16,7 @@ export default function MovieItem({ movie, onClick }) {
                 <h2 className={styles.movieTitle}>{movie.title}</h2>
                 <p><span className={styles.movieDetail}>Tipo: </span>{movie.type}</p>
                 <p><span className={styles.movieDetail}>Director: </span>{movie.director}</p>
-                <p><span className={styles.movieDetail}>Género: </span>{movie.gender}</p>
+                <p><span className={styles.movieDetail}>Género: </span>{movie.genre}</p>
                 <p><span className={styles.movieDetail}>Año: </span>{movie.year}</p>
                 <Rating value={movie.rating} />
             </div>
