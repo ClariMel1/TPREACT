@@ -13,7 +13,7 @@
         {
             "title": "The Matrix",
             "director": "Lana Wachowski, Lilly Wachowski",
-            "image": "https://th.bing.com/th/id/R.0f1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o?rik=abcdefg&pid=ImgRaw&r=0",
+            "image": "https://th.bing.com/th/id/OIP.nq66xqwF5qVWxt11yjmU6gHaLH?rs=1&pid=ImgDetMain",
             "type": "movie",
             "year": 1999,
             "genre": "Ciencia Ficción",
@@ -23,7 +23,7 @@
         {
             "title": "Interstellar",
             "director": "Christopher Nolan",
-            "image": "https://th.bing.com/th/id/R.1234567890abcdef1234567890abcdef?rik=abcdefg&pid=ImgRaw&r=0",
+            "image": "https://image.tmdb.org/t/p/original/tYaC23U62BOJRNVIlFGT6iowEwj.jpg",
             "type": "movie",
             "year": 2014,
             "genre": "Ciencia Ficción",
@@ -33,7 +33,7 @@
         {
             "title": "Rick and Morty",
             "director": "Dan Harmon, Justin Roiland",
-            "image": "https://th.bing.com/th/id/R.abcdef1234567890abcdef1234567890?rik=abcdefg&pid=ImgRaw&r=0",
+            "image": "https://es.web.img3.acsta.net/pictures/18/10/31/17/34/2348073.jpg",
             "type": "serie",
             "year": 2013,
             "genre": "Animación, Comedia, Ciencia Ficción",
@@ -43,7 +43,7 @@
         {
             "title": "Breaking Bad",
             "director": "Vince Gilligan",
-            "image": "https://th.bing.com/th/id/R.abcdef1234567890abcdef1234567890?rik=abcdefg&pid=ImgRaw&r=0",
+            "image": "https://es.web.img3.acsta.net/pictures/18/04/04/22/52/3191575.jpg",
             "type": "serie",
             "year": 2008,
             "genre": "Crimen, Drama, Suspenso",
@@ -53,7 +53,7 @@
         {
             "title": "Stranger Things",
             "director": "The Duffer Brothers",
-            "image": "https://th.bing.com/th/id/R.abcdef1234567890abcdef1234567890?rik=abcdefg&pid=ImgRaw&r=0",
+            "image": "https://es.web.img3.acsta.net/pictures/22/05/14/13/26/5638861.jpg",
             "type": "serie",
             "year": 2016,
             "genre": "Drama, Fantasía, Terror",

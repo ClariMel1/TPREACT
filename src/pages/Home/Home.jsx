@@ -11,7 +11,7 @@ import EditMovieForm from "../../components/EditMovieForm/EditMovieForm";
 export default function Home() {
     const { movies, addMovie, removeMovie, updateMovie } = useMovies()
     const [addMovieVisible, setAddMovieVisible] = useState(false)
-    const [ filteredMovies, setFilteredMovies ] = useState(movies)
+    const [filteredMovies, setFilteredMovies] = useState(movies)
     const [actualMovie, setActualMovie] = useState(null)
 
     useEffect(() => {
@@ -22,14 +22,15 @@ export default function Home() {
     const handleFilterChange = (filters) => {
         const { seen, search, genre, type, sortBy, sortType } = filters
         console.log("Filters:", filters)
-
+        console.log("Movies:", movies)
+        
         const filteredMovies = movies.filter((movie) => {
             return (movie.title.toLowerCase().includes(search.toLowerCase()) || movie.director.toLowerCase().includes(search.toLowerCase())) &&
-                (seen === "all" ? true : seen === "seen" ? movie.seen : !movie.seen) &&
-                (genre ? movie.genre === genre : true) &&
-                (type ? movie.type === type : true)
+            (seen === "all" ? true : seen === "seen" ? movie.seen : !movie.seen) &&
+            (genre ? movie.genre === genre : true) &&
+            (type ? movie.type === type : true)
         })        
-
+        
         const sortedMovies = filteredMovies.sort((a, b) => {
             if (sortBy === "year") {
                 return sortType === "asc" ? a.year - b.year : b.year - a.year
@@ -39,6 +40,8 @@ export default function Home() {
             return 0
         })
         setFilteredMovies(sortedMovies)
+        console.log("Filtered movies:", filteredMovies)
+        console.log("Sorted movies:", sortedMovies)
     }
 
     const handleClickViewMovie = (id) => {
