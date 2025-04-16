@@ -18,6 +18,7 @@ export default function MovieItem({ movie, onClick }) {
                 <p><span className={styles.movieDetail}>Director: </span>{movie.director}</p>
                 <p><span className={styles.movieDetail}>Género: </span>{movie.genre}</p>
                 <p><span className={styles.movieDetail}>Año: </span>{movie.year}</p>
+                <p><span className={styles.movieDetail}>Vista: </span>{movie.seen ? "✅" : "❌"}</p>
                 <Rating value={movie.rating} />
             </div>
         </article>
