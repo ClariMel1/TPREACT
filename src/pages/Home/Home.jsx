@@ -21,8 +21,6 @@ export default function Home() {
 
     const handleFilterChange = (filters) => {
         const { seen, search, genre, type, sortBy, sortType } = filters
-        console.log("Filters:", filters)
-        console.log("Movies:", movies)
         
         const filteredMovies = movies.filter((movie) => {
             return (movie.title.toLowerCase().includes(search.toLowerCase()) || movie.director.toLowerCase().includes(search.toLowerCase())) &&
@@ -40,8 +38,6 @@ export default function Home() {
             return 0
         })
         setFilteredMovies(sortedMovies)
-        console.log("Filtered movies:", filteredMovies)
-        console.log("Sorted movies:", sortedMovies)
     }
 
     const handleClickViewMovie = (id) => {
