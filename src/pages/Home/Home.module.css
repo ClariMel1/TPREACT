@@ -12,7 +12,7 @@ header {
     padding: 16px;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1;
     display: flex;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -71,5 +71,5 @@ header {
     border-radius: 100%;
     padding: 16px;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 1;
 }
