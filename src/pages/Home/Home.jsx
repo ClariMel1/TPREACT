@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import styles from "./Home.module.css"
 import MovieList from "../../components/MovieList/MovieList";
 import Title from "../../components/Title/Title"
-import Filters from "../../components/Filters/Filters";
+import SortAndFiltersOptions from "../../components/SortAndFiltersOptions/SortAndFiltersOptions";
 import AddMovieForm from "../../components/AddMovieForm/AddMovieForm";
 import EditMovieForm from "../../components/EditMovieForm/EditMovieForm";
 
@@ -20,20 +20,28 @@ export default function Home() {
     , [movies])
 
     const handleFilterChange = (filters) => {
-        const { search, genre, type, year, rating } = filters
+        const { seen, search, genre, type, sortBy, sortType } = filters
+        console.log("Filters:", filters)
 
         const filteredMovies = movies.filter((movie) => {
-            return movie.title.toLowerCase().includes(search.toLowerCase()) &&
+            return (movie.title.toLowerCase().includes(search.toLowerCase()) || movie.director.toLowerCase().includes(search.toLowerCase())) &&
+                (seen === "all" ? true : seen === "seen" ? movie.seen : !movie.seen) &&
                 (genre ? movie.genre === genre : true) &&
-                (type ? movie.type === type : true) &&
-                (year ? movie.year === +year : true) &&
-                (rating ? movie.rating === +rating : true)
+                (type ? movie.type === type : true)
         })        
-        setFilteredMovies(filteredMovies)
+
+        const sortedMovies = filteredMovies.sort((a, b) => {
+            if (sortBy === "year") {
+                return sortType === "asc" ? a.year - b.year : b.year - a.year
+            } else if (sortBy === "rating") {
+                return sortType === "asc" ? a.rating - b.rating : b.rating - a.rating
+            }
+            return 0
+        })
+        setFilteredMovies(sortedMovies)
     }
 
     const handleClickViewMovie = (id) => {
-        console.log("Movie clicked:", id)
         const movie = movies.find((movie) => movie.id === id)
         if (movie) {
             setActualMovie(movie)
@@ -57,7 +65,6 @@ export default function Home() {
             <header>
                 <Title text={"Mis Pelis y Series"} />
             </header>
-            <Filters onFilterChange={handleFilterChange} />
             {addMovieVisible && <AddMovieForm onAddMovie={addMovie} onClose={hideAddMovieForm}/>}
             {actualMovie && <EditMovieForm
                 movie={actualMovie}
@@ -72,6 +79,8 @@ export default function Home() {
                     <h2>No hay peliculas ni series</h2>
                 </div>
             )}
+
+            <SortAndFiltersOptions onFilterChange={handleFilterChange} />
             <button className={styles.addMovieButton} onClick={showAddMovieForm}><Plus /></button>
         </section>
     )

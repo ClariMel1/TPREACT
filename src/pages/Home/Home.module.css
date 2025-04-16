@@ -1,6 +1,6 @@
 .home {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 1fr 250px;
     grid-template-rows: auto 1fr;
     min-height: 100vh;
 }
@@ -17,6 +17,36 @@ header {
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
+}
+
+.tab {
+    flex-grow: 1;
+    padding: 16px;
+    text-align: center;
+    border-bottom: #555 solid 1px;
+    border-right: #555 solid 1px;
+}
+
+.tab.ctive {
+    background-color: #555;
+    color: white;
+    font-weight: 700;
+    border-bottom: #292929 solid 1px;   
+}
+
+.tab:last-child {
+    border-right: none;
+}
+
+.tab:hover {
+    cursor: pointer;
+    background-color: #292929;
+}
+
+.tabs {
+    display: flex;
+    position: sticky;
+    top: 0;
 }
 
 .emptyMovies {
@@ -41,4 +71,5 @@ header {
     border-radius: 100%;
     padding: 16px;
     cursor: pointer;
+    z-index: 1000;
 }

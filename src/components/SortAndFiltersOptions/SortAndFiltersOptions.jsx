@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import Search from '../Search/Search';
-import styles from './Filters.module.css';
+import styles from './SortAndFiltersOptions.module.css';
 
-export default function Filters({ onFilterChange }) {
+export default function SortAndFiltersOptions({ onFilterChange }) {
     const [filters, setFilters] = useState({
         search: '',
         genre: '',
         type: '',
-        year: '',
-        rating: ''
+        sortBy: '',
+        sortType: 'asc',
     });
 
     const handleFilterChange = (newFilters) => {
@@ -18,10 +18,29 @@ export default function Filters({ onFilterChange }) {
     }
 
     return (
-        <div className={styles.filters}>
+        <div className={styles.sortAndFiltersOptions}>
             <Search onSearch={(value) => handleFilterChange({ search: value })} />
-            <h2>Filtros</h2>
+            
+            <div className={styles.sortOptions}>
+                <h2>Orden</h2>
+                <select onChange={(e) => handleFilterChange({ sortBy: e.target.value })}>
+                    <option value="">Ninguno</option>
+                    <option value="year">Año</option>
+                    <option value="rating">Calificación</option>
+                </select>
+                <select onChange={(e) => handleFilterChange({ sortType: e.target.value })}>
+                    <option value="asc">Ascendente</option>
+                    <option value="desc">Descendente</option>
+                </select>
+            </div>
             <div className={styles.filterOptions}>
+                <h2>Filtros</h2>
+                <label>Ver:</label>
+                <select onChange={(e) => handleFilterChange({ seen: e.target.value })}>
+                    <option value="all">Todos</option>
+                    <option value="seen">Vistos</option>
+                    <option value="unseen">Sin ver</option>
+                </select>
                 <label>Genero:</label>
                 <select onChange={(e) => handleFilterChange({ genre: e.target.value })}>
                     <option value="">Todos</option>
@@ -40,26 +59,11 @@ export default function Filters({ onFilterChange }) {
                 <label>Tipo:</label>
                 <select onChange={(e) => handleFilterChange({ type: e.target.value })}>
                     <option value="">Todos</option>
-                    <option value="movie">Película</option>
-                    <option value="series">Serie</option>
+                    <option value="Película">Película</option>
+                    <option value="Serie">Serie</option>
                 </select>
-                <label>Año:</label>
-                <select onChange={(e) => handleFilterChange({ year: e.target.value })}>
-                    <option value="">Todos</option>
-                    {Array.from({ length: 123 }, (_, i) => 2025 - i).map((year) => (
-                        <option key={year} value={year}>{year}</option>
-                    ))}
-                </select>
-                <label>Rating:</label>
-                <select onChange={(e) => handleFilterChange({ rating: e.target.value })}>
-                    <option value="">Todos</option>
-                    <option value="5">⭐⭐⭐⭐⭐</option>
-                    <option value="4">⭐⭐⭐⭐</option>
-                    <option value="3">⭐⭐⭐</option>
-                    <option value="2">⭐⭐</option>
-                    <option value="1">⭐</option>
-                </select>                
             </div>
+            
         </div>
     );
 }
