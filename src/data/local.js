@@ -17,6 +17,7 @@ export function removeMovie(id) {
 }
 
 export function updateMovie(id, updatedMovie) {
+    updatedMovie.id = id; // Ensure the ID remains the same
     const movies = getLocalMovies();
     const newMovies = movies.map((movie) => (movie.id === id ? updatedMovie : movie));
     localStorage.setItem("movies", JSON.stringify(newMovies));
