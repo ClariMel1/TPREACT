@@ -9,7 +9,7 @@ import AddMovieForm from "../../components/AddMovieForm/AddMovieForm";
 import EditMovieForm from "../../components/EditMovieForm/EditMovieForm";
 
 export default function Home() {
-    const { movies, addMovie } = useMovies()
+    const { movies, addMovie, removeMovie, updateMovie } = useMovies()
     const [addMovieVisible, setAddMovieVisible] = useState(false)
     const [ filteredMovies, setFilteredMovies ] = useState(movies)
     const [actualMovie, setActualMovie] = useState(null)
@@ -40,10 +40,6 @@ export default function Home() {
         }
     }
 
-    const handleUpdateMovie = (updatedMovie) => {
-        console.log("Movie updated:", updatedMovie)
-    }
-
     const handleQuitViewMovie = () => {
         setActualMovie(null)
     }
@@ -63,7 +59,11 @@ export default function Home() {
             </header>
             <Filters onFilterChange={handleFilterChange} />
             {addMovieVisible && <AddMovieForm onAddMovie={addMovie} onClose={hideAddMovieForm}/>}
-            {actualMovie && <EditMovieForm movie={actualMovie} onClose={handleQuitViewMovie} onSave={handleUpdateMovie} />}
+            {actualMovie && <EditMovieForm
+                movie={actualMovie}
+                onClose={handleQuitViewMovie} 
+                onSaveMovie={updateMovie} 
+                onDeleteMovie={removeMovie} />}
 
             {filteredMovies.length > 0 ? (
                 <MovieList movies={filteredMovies} onClickMovie={handleClickViewMovie} />

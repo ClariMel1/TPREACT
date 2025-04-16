@@ -18,7 +18,7 @@ export default function ConfirmDialog({ title, message, onConfirm, onCancel }) {
                 <p>{message}</p>
                 <div className={styles.buttonContainer}>
                     <OutlinedButton text="Cancelar" onClick={handleCancel} />
-                    <Button text="Aceptar" onClick={handleConfirm} />
+                    <Button text="Aceptar" type="submit" onClick={handleConfirm} />
                 </div>
             </div>
         </div>
