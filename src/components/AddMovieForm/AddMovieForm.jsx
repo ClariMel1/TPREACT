@@ -1,8 +1,16 @@
+import { useState } from "react";
 import Button from "../Button/Button";
 import OutlinedButton from "../OutlinedButton.jsx/OutlinedButton";
 import styles from "./AddMovieForm.module.css";
 
 export default function AddMovie({ onAddMovie, onClose }) {
+    const [imgUrl, setImgUrl] = useState("https://cdn.pixabay.com/photo/2019/04/24/21/55/cinema-4153289_1280.jpg");
+
+    const handleImageChange = (e) => {
+        const value = e.target.value;
+        setImgUrl(value);
+    }
+
     const handleAddMovie = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -31,7 +39,7 @@ export default function AddMovie({ onAddMovie, onClose }) {
                     <label htmlFor="title">Título:</label>
                     <input type="text" id="title" name="title" required />
                     <label htmlFor="image">Imagen:</label>
-                    <input type="url" id="image" name="image" required />
+                    <input type="url" id="image" name="image" required onChange={handleImageChange}/>
                     <label htmlFor="type">Tipo:</label>
                     <select id="type" name="type" required>
                         <option value="Película">Película</option>
@@ -62,6 +70,7 @@ export default function AddMovie({ onAddMovie, onClose }) {
                     <Button text="Aceptar" type="submit" />
                     <OutlinedButton text="Cancelar" onClick={onClose} />
                 </form>
+                <img src={imgUrl} />
             </div>
         </div>
     );

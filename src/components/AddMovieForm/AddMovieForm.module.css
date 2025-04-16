@@ -1,14 +1,14 @@
 .addMovie {
     width: 100vw;
     height: 100vh;
+    z-index: 3;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.2);
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 3;
     backdrop-filter: blur(10px);
 }
 
@@ -17,43 +17,49 @@
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 400px;
-}
-
-.addMovieForm h2 {
-    grid-column: 1 / -1;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    text-align: center;
-    color: #e0e0e0;
-}
-
-.addMovieForm button {
-    grid-column: 1 / -1;
-}
-
-.addMovieForm form {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 400px 320px;
     gap: 16px;
+
+    h2 {
+        grid-column: 1 / -1;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        text-align: center;
+        color: #e0e0e0;
+    }
+
+    img {
+        width: 100%;
+        aspect-ratio: 3 / 5;
+        object-fit: cover;
+    }
+    
+    button {
+        grid-column: 1 / -1;
+    }
+    
+    form {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 16px;
+    }
+    
+    form label {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+    }
+    
+    form input,
+    form select {
+        padding: 8px;
+    }
+    
+    form input[type="checkbox"] {
+        width: 24px;
+        justify-self: start;
+    }
 }
 
-.addMovieForm form label {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-}
-
-.addMovieForm form input,
-.addMovieForm form select {
-    padding: 8px;
-}
-
-.addMovieForm form input[type="checkbox"] {
-    width: 24px;
-    justify-self: start;
-}

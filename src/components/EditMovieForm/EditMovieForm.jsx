@@ -5,8 +5,14 @@ import styles from "./EditMovieForm.module.css";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 
 export default function EditMovieForm({ movie, onSaveMovie, onDeleteMovie, onClose }) {
+    const [imgUrl, setImgUrl] = useState(movie.image);
     const [deleteDialog, setDeleteDialog] = useState(false);
     const [saveDialog, setSaveDialog] = useState(false);
+
+    const handleImageChange = (e) => {
+        const value = e.target.value;
+        setImgUrl(value);
+    }
 
     const handleSaveMovie = (e) => {
         e.preventDefault();
@@ -60,7 +66,7 @@ export default function EditMovieForm({ movie, onSaveMovie, onDeleteMovie, onClo
                         <label htmlFor="title">Título:</label>
                         <input type="text" id="title" name="title" defaultValue={movie.title} required />
                         <label htmlFor="image">Imagen:</label>
-                        <input type="url" id="image" name="image" defaultValue={movie.image} required />
+                        <input type="url" id="image" name="image" defaultValue={movie.image} required onChange={handleImageChange}/>
                         <label htmlFor="type">Tipo:</label>
                         <select id="type" name="type" required defaultValue={movie.type}>
                             <option value="Película">Película</option>
@@ -96,6 +102,7 @@ export default function EditMovieForm({ movie, onSaveMovie, onDeleteMovie, onClo
                             <ConfirmDialog title="Guardar" message="¿Desea guardar los cambios?" onConfirm={handleSaveMovie} onCancel={handleCancelSave}/>
                         )}
                     </form>
+                    <img src={imgUrl} alt={movie.title} className={styles.movieImage} />
                 </div>
             </div>
         </>

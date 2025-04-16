@@ -34,7 +34,8 @@
 
 .movieItem:hover {
     cursor: pointer;
+    background: #1a1a1a;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.02);
-    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #8a0000;
+    transition: all 0.3s ease-in-out;
 }

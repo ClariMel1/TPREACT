@@ -7,6 +7,7 @@ import Title from "../../components/Title/Title"
 import SortAndFiltersOptions from "../../components/SortAndFiltersOptions/SortAndFiltersOptions";
 import AddMovieForm from "../../components/AddMovieForm/AddMovieForm";
 import EditMovieForm from "../../components/EditMovieForm/EditMovieForm";
+import Button from "../../components/Button/Button";
 
 export default function Home() {
     const { movies, addMovie, removeMovie, updateMovie } = useMovies()
@@ -79,8 +80,13 @@ export default function Home() {
                 </div>
             )}
 
-            <SortAndFiltersOptions onFilterChange={handleFilterChange} />
-            <button className={styles.addMovieButton} onClick={showAddMovieForm}><Plus /></button>
+            <aside>
+                <SortAndFiltersOptions onFilterChange={handleFilterChange} />
+                <div className="counter">
+                    <strong>Cantidad: {filteredMovies.length}</strong>
+                </div>
+                <Button onClick={showAddMovieForm} text="Añadir película o serie" />
+            </aside>
         </section>
     )
 }

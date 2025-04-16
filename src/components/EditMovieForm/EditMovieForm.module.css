@@ -17,10 +17,9 @@
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 400px 320px;
     gap: 16px;
-    width: 400px;
 
     h2 {
         grid-column: 1 / -1;
@@ -29,6 +28,12 @@
         margin-bottom: 16px;
         text-align: center;
         color: #e0e0e0;
+    }
+
+    img {
+        width: 100%;
+        aspect-ratio: 3 / 5;
+        object-fit: cover;
     }
     
     button {
