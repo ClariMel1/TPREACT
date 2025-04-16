@@ -4,11 +4,12 @@ import styles from './SortAndFiltersOptions.module.css';
 
 export default function SortAndFiltersOptions({ onFilterChange }) {
     const [filters, setFilters] = useState({
-        search: '',
-        genre: '',
-        type: '',
-        sortBy: '',
-        sortType: 'asc',
+        search: "",
+        genre: "",
+        type: "",
+        sortBy: "",
+        sortType: "asc",
+        seen: "all"
     });
 
     const handleFilterChange = (newFilters) => {
