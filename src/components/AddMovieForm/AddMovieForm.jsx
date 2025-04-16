@@ -1,3 +1,5 @@
+import Button from "../Button/Button";
+import OutlinedButton from "../OutlinedButton.jsx/OutlinedButton";
 import styles from "./AddMovieForm.module.css";
 
 export default function AddMovie({ onAddMovie, onClose }) {
@@ -57,7 +59,8 @@ export default function AddMovie({ onAddMovie, onClose }) {
                     <input type="range" id="rating" name="rating" min="1" max="5" required />
                     <label htmlFor="seen">¿La viste?</label>
                     <input type="checkbox" name="seen" id="seen" />
-                    <button type="submit">Aceptar</button>
+                    <Button text="Aceptar" type="submit" />
+                    <OutlinedButton text="Cancelar" onClick={onClose} />
                 </form>
             </div>
         </div>
