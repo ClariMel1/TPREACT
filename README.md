@@ -20,7 +20,10 @@
 
 ## Guia de instalación:
 - **1.** Clonar el repositorio.
-  
+
+![ClonarRepo](https://github.com/ClariMel1/TPREACT/blob/main/imagenes/clonar-repo.png)
+
+
 - **2.** Instalar las dependencias.
 ![Instalar]((https://github.com/ClariMel1/TPREACT/blob/main/imagenes/instalar.png))
 
