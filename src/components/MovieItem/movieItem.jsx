@@ -12,9 +12,17 @@ export default function MovieItem({ movie, onToggleVista, onDelete, onEdit }) {
   };
 
   return (
-    <div className={styles.movie} onClick={() => onClick?.(movie)}>
-      <div className={styles.infoMovie}>
+    <div className={styles.movie}>
+      
+        {movie.imagen && (
+        <img
+          src={movie.imagen}
+          alt={`Imagen de ${movie.titulo}`}
+          className={styles.movieImage}
+          />
+        )}
 
+      <div className={styles.infoMovie}>
         {editando ? (
           <>
             <input

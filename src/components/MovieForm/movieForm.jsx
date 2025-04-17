@@ -7,7 +7,8 @@ export default function MovieForm({onAddMovie}) {
   const [anio, setAno] = useState("");
   const [genero, setGenero] = useState("");
   const [rating, setRating] = useState("");
-  const [tipo, setTipo] = useState("película")
+  const [tipo, setTipo] = useState("película");
+  const [imagen, setImagen] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,6 +72,11 @@ export default function MovieForm({onAddMovie}) {
           <option value="serie">Serie</option>
         </select>
       </div>
+      <div className="mb-3">
+        <label htmlFor="imagen" className="block">URL de Imagen:</label>
+        <input id="imagen" type="url" value={imagen} onChange={(e) => setImagen(e.target.value)} placeholder="https://ejemplo.com/imagen.jpg" />
+      </div>
+
 
       <button type="submit"> Agregar </button>
     </form>
