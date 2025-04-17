@@ -15,7 +15,6 @@ import Filter from '../../components/Filters/Filter';
 export default function Home() {
     const [peliculas, setPeliculas] = useWatchList('peliculas', []);
 
-    const [addMovieVisible, setAddMovieVisible] = useState(false);
 
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [searchTerm, setSearchTerm] = useState(""); 
@@ -54,6 +53,14 @@ export default function Home() {
       setPeliculas(actualizadas);
     };
 
+    const onToggleVista = (id) => {
+      setPeliculas(prevPeliculas =>
+        prevPeliculas.map(pelicula =>
+          pelicula.id === id ? { ...pelicula, vista: !pelicula.vista } : pelicula
+        )
+      );
+    };
+
 
   return (
     <section>
@@ -79,6 +86,7 @@ export default function Home() {
             ) : (
           <MovieList 
             movies={filteredPeliculas}
+            onToggleVista={onToggleVista}
             onDeleteMovie={eliminarPelicula}
             onEditMovie={editarPelicula}/>
         )}

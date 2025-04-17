@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./MovieItem.module.css";
 
-export default function MovieItem({ movie, onClick, onDelete, onEdit }) {
+export default function MovieItem({ movie, onToggleVista, onDelete, onEdit }) {
   const [editando, setEditando] = useState(false);
   const [tituloEditado, setTituloEditado] = useState(movie.titulo);
 
@@ -14,6 +14,7 @@ export default function MovieItem({ movie, onClick, onDelete, onEdit }) {
   return (
     <div className={styles.movie} onClick={() => onClick?.(movie)}>
       <div className={styles.infoMovie}>
+
         {editando ? (
           <>
             <input
@@ -34,6 +35,10 @@ export default function MovieItem({ movie, onClick, onDelete, onEdit }) {
             <p><span className="font-medium">Rating:</span> ⭐ {movie.rating}</p>
             <button onClick={() => setEditando(true)}> Editar</button>
             <button onClick={() => onDelete(movie.id)}> Eliminar</button>
+
+            <button onClick={() => onToggleVista(movie.id)}>
+              {movie.vista ? 'Vista' : 'No Vista'}
+            </button>
           </>
         )}
       </div>

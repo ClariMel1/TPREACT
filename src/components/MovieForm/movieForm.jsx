@@ -7,7 +7,7 @@ export default function MovieForm({onAddMovie}) {
   const [anio, setAno] = useState("");
   const [genero, setGenero] = useState("");
   const [rating, setRating] = useState("");
-  const [tipo, setTipo] = useState("película");
+  const [tipo, setTipo] = useState("película")
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +19,9 @@ export default function MovieForm({onAddMovie}) {
       anio,
       genero,
       rating,
-      tipo
+      tipo,
+      imagen,
+      vista: false 
     };
 
     onAddMovie(nuevaPelicula); 
