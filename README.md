@@ -25,10 +25,13 @@
 
 
 - **2.** Instalar las dependencias.
+  
 ![Instalar](https://github.com/ClariMel1/TPREACT/blob/main/imagenes/instalar.png)
 
 - **3.** Ejecutar la aplicación.
+  
   3.1: Iniciamos el servidor de desarrollo con el siguiente comando:
+  
 ![Correr](https://github.com/ClariMel1/TPREACT/blob/main/imagenes/run-dev.png)
   3.2: Abrimos el navegador y visitamos la url: 
 ![Abrir](https://github.com/ClariMel1/TPREACT/blob/main/imagenes/abrir.png)
