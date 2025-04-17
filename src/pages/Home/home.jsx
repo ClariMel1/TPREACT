@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import styles from './home.module.css';
+
 import Titulo from '../../components/Title/title';
 import MovieForm from '../../components/MovieForm/movieForm';
 import MovieList from '../../components/MovieList/movieList';
@@ -7,6 +9,7 @@ import useWatchList from '../../hooks/useWatchList';
 import MovieCounter from '../../components/MovieCounter/movieCounter';
 import Search from '../../components/Search/Search';
 import Filter from '../../components/Filters/Filter';
+
 
 
 export default function Home() {
@@ -26,7 +29,7 @@ export default function Home() {
 
     const agregarPelicula = (pelicula) => {
         setPeliculas([...peliculas, pelicula]);
-        setMostrarFormulario(false); // Ocultar el form luego de agregar
+        setMostrarFormulario(false);
     };
 
     const handleSearchChange = (value) => {
@@ -39,25 +42,47 @@ export default function Home() {
     );
 
 
+    const eliminarPelicula = (id) => {
+      const actualizadas = peliculas.filter(p => p.id !== id);
+      setPeliculas(actualizadas);
+    };
+
+    const editarPelicula = (peliculaEditada) => {
+      const actualizadas = peliculas.map(p =>
+        p.id === peliculaEditada.id ? peliculaEditada : p
+      );
+      setPeliculas(actualizadas);
+    };
+
 
   return (
     <section>
-        <div>
-            <Titulo texto={"CineFlix"}/>
-            <MovieCounter peliculas={peliculas} />
+      <div className="header fixed-top bg-dark bg-opacity-75 text-white shadow-sm p-4">
+        <Titulo texto={"Series y Peliculas"}/>
+        <MovieCounter peliculas={peliculas} />
+
+          <div className={styles.buscaAgrega}>
             <Search searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-        </div>
+           <button onClick={showAddMovieForm} className={styles.agregarPelicula}>
+              {mostrarFormulario ? "x" : "+"}
+            </button>
+          </div>
 
-      {mostrarFormulario && (
-        <MovieForm onAddMovie={agregarPelicula} />
-      )}
+        {mostrarFormulario && (<MovieForm onAddMovie={agregarPelicula} />)}
+      </div> 
 
-      {peliculas.length > 0 ? (
-        <MovieList movies={peliculas} />
-      ) : (
-        <p>No hay películas ni series aún.</p>
-      )}
-
+      <div className={styles.carteleraPeliculas}>
+        {peliculas.length === 0 ? (
+          <p>No hay películas ni series aún.</p>
+            ) : filteredPeliculas.length === 0 ? (
+          <p>No se encontraron resultados.</p>
+            ) : (
+          <MovieList 
+            movies={filteredPeliculas}
+            onDeleteMovie={eliminarPelicula}
+            onEditMovie={editarPelicula}/>
+        )}
+      </div>
 
       <Filter
         generoSeleccionado={genero}
@@ -67,16 +92,6 @@ export default function Home() {
         onTipoChange={setTipo}
         onOrdenChange={setOrden}
       />
-
-        {filteredPeliculas.length > 0 ? (
-      <MovieList movies={filteredPeliculas} />
-      ) : (
-        <p>No se encontraron resultados.</p>
-      )}
-
-      <button onClick={showAddMovieForm}>
-        {mostrarFormulario ? "Cancelar" : "Agregar Película o Serie"}
-      </button>
     </section>
   );
 }

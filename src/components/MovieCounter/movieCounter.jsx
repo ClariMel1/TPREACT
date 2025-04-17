@@ -1,3 +1,4 @@
+import styles from './movieCounter.module.css';
 
 export default function MovieCounter({ peliculas }) {
     // Función para contar el total por género
@@ -14,7 +15,7 @@ export default function MovieCounter({ peliculas }) {
     const totalCienciaFiccion = contarPorGenero("Ciencia Ficción");
 
     return (
-        <div>
+        <div className={styles.contador}>
             <p>Total de Películas y Series: {totalPeliculas}</p>
             <p>Acción: {totalAccion}</p>
             <p>Comedia: {totalComedia}</p>
