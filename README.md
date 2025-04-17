@@ -17,3 +17,9 @@
  - *App.js*:define Este define qué componentes se renderizan en la interfaz de usuario.
  - *Index.css*: Este archivo contiene los estilos de la aplicacion en general.
  - *package-json.js*: Este define las dependencias y scripts que se puedan ejecutar.
+
+## Guia de instalación:
+- **1.** Clonar el repositorio.
+- **2.** Instalar las dependencias.
+- **3.** Ejecutar la aplicación.
+- **4.** Problemas que pueden surgir: 
