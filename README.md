@@ -10,10 +10,9 @@
  - **Clara Pelozo** - Legajo FAI-4938 - mail: clara.pelozo@est.fi.uncoma.edu.ar - Github: ClariMel1
  - **Luciana Romano** - Legajo FAI-3075 - mail: luciana.romano@est.fi.uncoma.edu.ar - Github: Lucianaromano
 
-   **Aplicacion para gestionar peliculas y series, desarrollada con React.**
+ ## Aplicacion para gestionar peliculas y series, desarrollada con React.
 
- - Funcion de los archivos iniciales:
-  
+ Funcion de los archivos iniciales:
  - *index.js* : Este archivo es el principal de una aplicación React. Es el archivo donde se inicializa la aplicación y se monta el componente raíz en el DOM.
  - *App.js*:define Este define qué componentes se renderizan en la interfaz de usuario.
  - *Index.css*: Este archivo contiene los estilos de la aplicacion en general.
