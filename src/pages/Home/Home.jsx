@@ -76,7 +76,7 @@ export default function Home() {
                 <MovieList movies={filteredMovies} onClickMovie={handleClickViewMovie} />
             ) : (
                 <div className={styles.emptyMovies}>
-                    <h2>No hay peliculas ni series</h2>
+                    <h2>No hay películas ni series</h2>
                 </div>
             )}
 
