@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import styles from './home.module.css';
 
 import Titulo from '../../components/Title/title';
@@ -8,15 +7,17 @@ import MovieList from '../../components/MovieList/movieList';
 import useWatchList from '../../hooks/useWatchList';
 import MovieCounter from '../../components/MovieCounter/movieCounter';
 import Search from '../../components/Search/Search';
-import Filter from '../../components/Filters/Filter';
+import Filter from '../../components/Filters/filter';
 
-
+import { Sparkles, X } from 'lucide-react';
 
 export default function Home() {
     const [peliculas, setPeliculas] = useWatchList('peliculas', []);
 
 
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
+    const [mostrarFiltros, setMostrarFiltros] = useState(false);
+
     const [searchTerm, setSearchTerm] = useState(""); 
     const [orden, setOrden] = useState("");
     const [genero, setGenero] = useState("");
@@ -24,6 +25,10 @@ export default function Home() {
 
     const showAddMovieForm = () => {
         setMostrarFormulario(prevState => !prevState);
+    };
+
+    const toggleFiltros = () => {
+      setMostrarFiltros(prevState => !prevState);
     };
 
     const agregarPelicula = (pelicula) => {
@@ -35,14 +40,24 @@ export default function Home() {
         setSearchTerm(value);
     };
 
-    const filteredPeliculas = peliculas.filter((pelicula) =>
-        pelicula.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pelicula.director.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  
+    const filteredPeliculas = peliculas
+    .filter((pelicula) =>
+      pelicula.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pelicula.director.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter((pelicula) => !genero || pelicula.genero === genero)
+    .filter((pelicula) => !tipo || pelicula.tipo === tipo)
+    .sort((a, b) => {
+      if (orden === "anio-asc") return a.anio - b.anio;
+      if (orden === "anio-desc") return b.anio - a.anio;
+      if (orden === "rating-asc") return a.rating - b.rating;
+      if (orden === "rating-desc") return b.rating - a.rating;
+      return 0;
+    });
 
 
-    const eliminarPelicula = (id) => {
-      const actualizadas = peliculas.filter(p => p.id !== id);
+  const eliminarPelicula = (id) => {
+  const actualizadas = peliculas.filter(p => p.id !== id);
       setPeliculas(actualizadas);
     };
 
@@ -70,15 +85,30 @@ export default function Home() {
 
           <div className={styles.buscaAgrega}>
             <Search searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+            <button onClick={toggleFiltros} className={styles.agregarPelicula}>
+            {mostrarFiltros ? <X /> : <Sparkles />}
+          </button>
            <button onClick={showAddMovieForm} className={styles.agregarPelicula}>
               {mostrarFormulario ? "x" : "+"}
             </button>
           </div>
 
+          {mostrarFiltros && (
+          <Filter
+            generoSeleccionado={genero}
+            tipoSeleccionado={tipo}
+            ordenSeleccionado={orden}
+            onGeneroChange={setGenero}
+            onTipoChange={setTipo}
+            onOrdenChange={setOrden}
+          />
+        )}
+
         {mostrarFormulario && (<MovieForm onAddMovie={agregarPelicula} />)}
       </div> 
 
       <div className={styles.carteleraPeliculas}>
+
         {peliculas.length === 0 ? (
           <p>No hay películas ni series aún.</p>
             ) : filteredPeliculas.length === 0 ? (
@@ -92,14 +122,6 @@ export default function Home() {
         )}
       </div>
 
-      <Filter
-        generoSeleccionado={genero}
-        tipoSeleccionado={tipo}
-        ordenSeleccionado={orden}
-        onGeneroChange={setGenero}
-        onTipoChange={setTipo}
-        onOrdenChange={setOrden}
-      />
     </section>
   );
 }

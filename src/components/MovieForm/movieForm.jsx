@@ -1,20 +1,21 @@
-
 import { useState } from "react";
+import Titulo from "../Title/title";
 
-export default function MovieForm({onAddMovie}) {
-  const [titulo, setTitulo] = useState("");
-  const [director, setDirector] = useState("");
-  const [anio, setAno] = useState("");
-  const [genero, setGenero] = useState("");
-  const [rating, setRating] = useState("");
-  const [tipo, setTipo] = useState("película");
-  const [imagen, setImagen] = useState("");
+export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo = "agregar" }) {
+
+  const [titulo, setTitulo] = useState(initialData.titulo || "");
+  const [director, setDirector] = useState(initialData.director || "");
+  const [anio, setAno] = useState(initialData.anio || "");
+  const [genero, setGenero] = useState(initialData.genero || "");
+  const [rating, setRating] = useState(initialData.rating || "");
+  const [tipo, setTipo] = useState(initialData.tipo || "película");
+  const [imagen, setImagen] = useState(initialData.imagen || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
   
     const nuevaPelicula = {
-      id: Date.now(), 
+      id: initialData.id || Date.now(), 
       titulo,
       director,
       anio,
@@ -22,16 +23,19 @@ export default function MovieForm({onAddMovie}) {
       rating,
       tipo,
       imagen,
-      vista: false 
+      vista: initialData.vista || false 
     };
 
-    onAddMovie(nuevaPelicula); 
-    console.log("Nueva Película o Serie:", nuevaPelicula);
+    if (modo === "editar" && onSubmit) {
+      onSubmit(nuevaPelicula);
+    } else if (modo === "agregar" && onAddMovie) {
+      onAddMovie(nuevaPelicula);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2> Agregar nueva Película o Serie a la lista!</h2>
+       <Titulo texto={modo === "editar" ? "Editar" : "Agregar a la coleccion"} />
       
       <div className="mb-3">
         <label htmlFor="titulo" className="block">Título:</label>
@@ -78,7 +82,10 @@ export default function MovieForm({onAddMovie}) {
       </div>
 
 
-      <button type="submit"> Agregar </button>
+      <button type="submit">
+        {modo === "editar" ? "Guardar Cambios" : "Agregar"}
+      </button>
+
     </form>
   );
 }
