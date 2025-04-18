@@ -5,7 +5,7 @@ import { EyeClosed, Eye, CircleX, Pencil} from 'lucide-react';
 
 export default function MovieItem({ movie, onToggleVista, onDelete, onEdit }) {
   const [editando, setEditando] = useState(false);
-  
+
   return (
     <div className={styles.movie}>
       
@@ -21,6 +21,7 @@ export default function MovieItem({ movie, onToggleVista, onDelete, onEdit }) {
                   onEdit(peliculaActualizada);
                   setEditando(false);
                 }}
+                onCancel={() => setEditando(false)}
                 modo="editar"
               />
         ) : (

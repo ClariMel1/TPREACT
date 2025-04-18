@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Titulo from "../Title/title";
 
-export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo = "agregar" }) {
-
+export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo = "agregar" , onCancel}) {
+  const [showForm, setShowForm] = useState(true);
+  
   const [titulo, setTitulo] = useState(initialData.titulo || "");
   const [director, setDirector] = useState(initialData.director || "");
   const [anio, setAno] = useState(initialData.anio || "");
@@ -31,7 +32,16 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
     } else if (modo === "agregar" && onAddMovie) {
       onAddMovie(nuevaPelicula);
     }
+
+    setShowForm(false); 
   };
+
+  const handleCancel = () => {
+    setShowForm(false);
+    if (onCancel) onCancel(); 
+  };
+
+  if (!showForm) return null;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -84,6 +94,9 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
 
       <button type="submit">
         {modo === "editar" ? "Guardar Cambios" : "Agregar"}
+      </button>
+      <button type="button" onClick={handleCancel}>
+        Cancelar
       </button>
 
     </form>

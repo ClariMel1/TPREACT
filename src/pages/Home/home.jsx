@@ -89,7 +89,7 @@ export default function Home() {
             {mostrarFiltros ? <X /> : <Sparkles />}
           </button>
            <button onClick={showAddMovieForm} className={styles.agregarPelicula}>
-              {mostrarFormulario ? "x" : "+"}
+              {mostrarFormulario  ? "Cancelar" : "Agregar Película/Serie"}
             </button>
           </div>
 
