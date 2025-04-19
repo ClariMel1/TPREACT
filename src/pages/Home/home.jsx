@@ -9,7 +9,7 @@ import MovieCounter from '../../components/MovieCounter/movieCounter';
 import Search from '../../components/Search/Search';
 import Filter from '../../components/Filters/filter';
 
-import { Sparkles, X } from 'lucide-react';
+import { Sparkles, X, Plus } from 'lucide-react';
 
 export default function Home() {
     const [peliculas, setPeliculas] = useWatchList('peliculas', []);
@@ -79,18 +79,16 @@ export default function Home() {
 
   return (
     <section>
-      <div className="header fixed-top bg-dark bg-opacity-75 text-white shadow-sm p-4">
+      <header className="header fixed-top bg-dark bg-opacity-75 text-white shadow-lg p-4">
         <Titulo texto={"Series y Peliculas"}/>
         <MovieCounter peliculas={peliculas} />
 
           <div className={styles.buscaAgrega}>
             <Search searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-            <button onClick={toggleFiltros} className={styles.agregarPelicula}>
+            <button onClick={toggleFiltros} className={styles.filtros}>
             {mostrarFiltros ? <X /> : <Sparkles />}
           </button>
-           <button onClick={showAddMovieForm} className={styles.agregarPelicula}>
-              {mostrarFormulario  ? "Cancelar" : "Agregar Película/Serie"}
-            </button>
+
           </div>
 
           {mostrarFiltros && (
@@ -105,7 +103,7 @@ export default function Home() {
         )}
 
         {mostrarFormulario && (<MovieForm onAddMovie={agregarPelicula} />)}
-      </div> 
+      </header> 
 
       <div className={styles.carteleraPeliculas}>
 
@@ -121,6 +119,8 @@ export default function Home() {
             onEditMovie={editarPelicula}/>
         )}
       </div>
+
+      <button onClick={showAddMovieForm} className={styles.agregarPelicula}> {mostrarFormulario  ? "Cancelar" : <><Plus /> Agregar Película / Serie</>}</button>
 
     </section>
   );

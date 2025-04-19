@@ -1,13 +1,51 @@
 .movie{
-    border:black 1px solid;
-    padding:10px;
-    text-align: center;
-    width: 100%;
+    position:relative;
+    overflow: hidden;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.movie:hover {
+    box-shadow:0 40px 40px rgba(0, 0, 0, 0.15); /* un poco más intensa al pasar el mouse */
 }
 
 .movieImage{
     width: 100%;
    height: 410px;
    object-fit: cover;
-  /* border-radius: 8px;*/
+   border-top-left-radius: 1rem;
+   border-top-right-radius: 1rem;
 }
+
+.infoMovie{
+    text-align: left;
+    background-color: black;
+    border-bottom-left-radius: 1rem ;
+    border-bottom-right-radius: 1rem ;
+    padding: 1rem 2rem;
+}
+
+.botonAccion {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+}
+
+.eliminar {
+    top: 0.2rem;
+    left: 0.5rem;
+}
+  
+.editar {
+    top: 0.5rem;
+    right: 0.5rem;
+}
+  
+.visto {
+    top: 0.5rem;
+    right: 2.5rem;
+}
+  
+
