@@ -1,83 +1,79 @@
-import React, { useState } from 'react';
-
-import Titulo from '../../components/Title/title';
-import MovieForm from '../../components/MovieForm/movieForm';
-import MovieList from '../../components/MovieList/movieList';
-import useWatchList from '../../hooks/useWatchList';
-import MovieCounter from '../../components/MovieCounter/movieCounter';
-import Search from '../../components/Search/Search';
-import Filter from '../../components/Filters/Filter';
-
+import React, { useState, useEffect } from 'react';
+import './StylesHome.css';
+import Header from '../../components/Header/Header.jsx';
+import Filter from '../../components/Filter/Filter.jsx';
+import ItemList from '../../components/ItemList/ItemList.jsx';
+import Form from '../../components/Form/Form.jsx';
+import { PlusCircle } from 'lucide-react';
 
 export default function Home() {
-    const [peliculas, setPeliculas] = useWatchList('peliculas', []);
+    const [showForm, setShowForm] = useState(false);
+    const [items, setItems] = useState([]);
+    const [editingItem, setEditingItem] = useState(null);
 
-    const [addMovieVisible, setAddMovieVisible] = useState(false);
+    useEffect(() => {
+        const storedItems = localStorage.getItem('items');
+        if (storedItems) {
+            setItems(JSON.parse(storedItems));
+        }
+    }, []);
 
-    const [mostrarFormulario, setMostrarFormulario] = useState(false);
-    const [searchTerm, setSearchTerm] = useState(""); 
-    const [orden, setOrden] = useState("");
-    const [genero, setGenero] = useState("");
-    const [tipo, setTipo] = useState("");
+    useEffect(() => {
+        if (items.length > 0) {
+            localStorage.setItem('items', JSON.stringify(items));
+        }
+    }, [items]);
 
-    const showAddMovieForm = () => {
-        setMostrarFormulario(prevState => !prevState);
+    const handleAddClick = () => {
+        setEditingItem(null); 
+        setShowForm(true);
     };
 
-    const agregarPelicula = (pelicula) => {
-        setPeliculas([...peliculas, pelicula]);
-        setMostrarFormulario(false); // Ocultar el form luego de agregar
+    const handleFormSubmit = (newItem) => {
+        if (editingItem) {
+            
+            setItems(items.map((item) => (item.id === editingItem.id ? newItem : item)));
+        } else {
+            
+            setItems([...items, { ...newItem, id: Date.now() }]);
+        }
+        setShowForm(false); 
+        setEditingItem(null); 
     };
 
-    const handleSearchChange = (value) => {
-        setSearchTerm(value);
+    const handleEditClick = (item) => {
+        setEditingItem(item); 
+        setShowForm(true); 
     };
 
-    const filteredPeliculas = peliculas.filter((pelicula) =>
-        pelicula.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pelicula.director.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleDeleteClick = (id) => {
+        setItems(items.filter((item) => item.id !== id)); 
+    };
 
-
-
-  return (
-    <section>
+    return (
         <div>
-            <Titulo texto={"CineFlix"}/>
-            <MovieCounter peliculas={peliculas} />
-            <Search searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+            <Header />
+            <div className="home-container">
+                <h1>Bienvenido a Series y Películas</h1>
+                <div className="home-buttons">
+                    <button className="add-button" onClick={handleAddClick}>
+                        <PlusCircle size={16} /> Agregar
+                    </button>
+                </div>
+                <Filter />
+                {showForm && (
+                    <Form
+                        onSubmit={handleFormSubmit}
+                        onCancel={() => setShowForm(false)}
+                        initialData={editingItem || {}}
+                    />
+                )}
+                <ItemList
+                    items={items}
+                    onEdit={handleEditClick}
+                    onDelete={handleDeleteClick}
+                />
+            </div>
         </div>
-
-      {mostrarFormulario && (
-        <MovieForm onAddMovie={agregarPelicula} />
-      )}
-
-      {peliculas.length > 0 ? (
-        <MovieList movies={peliculas} />
-      ) : (
-        <p>No hay películas ni series aún.</p>
-      )}
-
-
-      <Filter
-        generoSeleccionado={genero}
-        tipoSeleccionado={tipo}
-        ordenSeleccionado={orden}
-        onGeneroChange={setGenero}
-        onTipoChange={setTipo}
-        onOrdenChange={setOrden}
-      />
-
-        {filteredPeliculas.length > 0 ? (
-      <MovieList movies={filteredPeliculas} />
-      ) : (
-        <p>No se encontraron resultados.</p>
-      )}
-
-      <button onClick={showAddMovieForm}>
-        {mostrarFormulario ? "Cancelar" : "Agregar Película o Serie"}
-      </button>
-    </section>
-  );
+    );
 }
-

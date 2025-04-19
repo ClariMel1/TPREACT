@@ -1,0 +1,64 @@
+{
+    "movies": [
+        {
+            "title": "Inception",
+            "director": "Christopher Nolan",
+            "image": "https://th.bing.com/th/id/R.ff96b4e3590eb34eab11a58b4c0f8639?rik=X3b1jS86vhKDGw&pid=ImgRaw&r=0",
+            "type": "movie",
+            "year": 2010,
+            "genre": "Ciencia Ficción",
+            "rating": 4,
+            "seen": true
+        },
+        {
+            "title": "The Matrix",
+            "director": "Lana Wachowski, Lilly Wachowski",
+            "image": "https://th.bing.com/th/id/OIP.nq66xqwF5qVWxt11yjmU6gHaLH?rs=1&pid=ImgDetMain",
+            "type": "movie",
+            "year": 1999,
+            "genre": "Ciencia Ficción",
+            "rating": 5,
+            "seen": true
+        },
+        {
+            "title": "Interstellar",
+            "director": "Christopher Nolan",
+            "image": "https://image.tmdb.org/t/p/original/tYaC23U62BOJRNVIlFGT6iowEwj.jpg",
+            "type": "movie",
+            "year": 2014,
+            "genre": "Ciencia Ficción",
+            "rating": 5,
+            "seen": false
+        },
+        {
+            "title": "Rick and Morty",
+            "director": "Dan Harmon, Justin Roiland",
+            "image": "https://es.web.img3.acsta.net/pictures/18/10/31/17/34/2348073.jpg",
+            "type": "serie",
+            "year": 2013,
+            "genre": "Animación, Comedia, Ciencia Ficción",
+            "rating": 5,
+            "seen": true
+        },
+        {
+            "title": "Breaking Bad",
+            "director": "Vince Gilligan",
+            "image": "https://es.web.img3.acsta.net/pictures/18/04/04/22/52/3191575.jpg",
+            "type": "serie",
+            "year": 2008,
+            "genre": "Crimen, Drama, Suspenso",
+            "rating": 5,
+            "seen": true
+        },
+        {
+            "title": "Stranger Things",
+            "director": "The Duffer Brothers",
+            "image": "https://es.web.img3.acsta.net/pictures/22/05/14/13/26/5638861.jpg",
+            "type": "serie",
+            "year": 2016,
+            "genre": "Drama, Fantasía, Terror",
+            "rating": 4,
+            "seen": false
+        }
+    ]
+}

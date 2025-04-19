@@ -1,0 +1,35 @@
+.filter-container {
+    margin: 20px 0; 
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: center;
+    gap: 15px; 
+    justify-content: center; 
+}
+
+.filter-container label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+.filter-container select {
+    padding: 8px 12px; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9f9f9; 
+    color: #333; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-container select:hover {
+    border-color: #48A6A7; 
+    box-shadow: 0 0 5px rgba(72, 166, 167, 0.5); 
+}
+
+.filter-container select:focus {
+    border-color: #48A6A7;
+    outline: none;
+    box-shadow: 0 0 5px rgba(72, 166, 167, 0.8); 
+}

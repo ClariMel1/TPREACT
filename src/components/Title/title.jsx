@@ -1,5 +1,7 @@
-import styles from './title.module.css';
+import styles from "./Title.module.css"
 
-export default function Titulo({ texto }) {
-  return <h1 className={styles.titulo}>{texto}</h1>;
+export default function Title({ text }) {
+    return (
+        <h1 className={styles.title}>{text}</h1>
+    )
 }
