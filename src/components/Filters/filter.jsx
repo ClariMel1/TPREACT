@@ -1,3 +1,6 @@
+import styles from './filter.module.css';
+import Dropdown from '../Dropdown/dropdown';
+
 export default function Filter({
   generoSeleccionado,
   tipoSeleccionado,
@@ -7,29 +10,17 @@ export default function Filter({
   onOrdenChange,
 }) {
   return (
-    <div className="filtros">
-      <select value={generoSeleccionado} onChange={(e) => onGeneroChange(e.target.value)}>
-        <option value="">Todos los géneros</option>
-        <option value="Acción">Acción</option>
-        <option value="Comedia">Comedia</option>
-        <option value="Drama">Drama</option>
-        <option value="Terror">Terror</option>
-        <option value="Ciencia Ficción">Ciencia Ficción</option>
-      </select>
-
-      <select value={tipoSeleccionado} onChange={(e) => onTipoChange(e.target.value)}>
-        <option value="">Películas y series</option>
-        <option value="película">Película</option>
-        <option value="serie">Serie</option>
-      </select>
-
-      <select value={ordenSeleccionado} onChange={(e) => onOrdenChange(e.target.value)}>
-        <option value="">Ordenar por</option>
-        <option value="anio-asc">Año ↑</option>
-        <option value="anio-desc">Año ↓</option>
-        <option value="rating-asc">Rating ↑</option>
-        <option value="rating-desc">Rating ↓</option>
-      </select>
+    <div className={styles.filtros}>
+      <Dropdown label="Género" value={generoSeleccionado} options={['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción']} defaultOption="Todos los géneros" onChange={onGeneroChange} />
+      <Dropdown label="Tipo" value={tipoSeleccionado} options={['película', 'serie']} defaultOption="Películas y series" onChange={onTipoChange} />
+      <Dropdown label="Orden" value={ordenSeleccionado}
+        options={[
+          { label: 'Año ↑', value: 'anio-asc' },
+          { label: 'Año ↓', value: 'anio-desc' },
+          { label: 'Rating ↑', value: 'rating-asc' },
+          { label: 'Rating ↓', value: 'rating-desc' },
+        ]}
+        defaultOption="Ordenar por" onChange={onOrdenChange}/>
     </div>
   );
 }
