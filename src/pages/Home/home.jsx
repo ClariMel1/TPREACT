@@ -24,7 +24,7 @@ export default function Home() {
     const [tipo, setTipo] = useState("");
 
     const showAddMovieForm = () => {
-        setMostrarFormulario(prevState => !prevState);
+      setMostrarFormulario(prev => !prev);
     };
 
     const toggleFiltros = () => {
@@ -32,8 +32,8 @@ export default function Home() {
     };
 
     const agregarPelicula = (pelicula) => {
-        setPeliculas([...peliculas, pelicula]);
-        setMostrarFormulario(false);
+      setPeliculas([...peliculas, pelicula]);
+      setMostrarFormulario(false);
     };
 
     const handleSearchChange = (value) => {
@@ -86,9 +86,8 @@ export default function Home() {
           <div className={styles.buscaAgrega}>
             <Search searchTerm={searchTerm} onSearchChange={handleSearchChange} />
             <button onClick={toggleFiltros} className={styles.filtros}>
-            {mostrarFiltros ? <X /> : <Sparkles />}
-          </button>
-
+              <span className={`${styles.icono} ${mostrarFiltros ? styles.rotado : ''}`}>{mostrarFiltros ? <X /> : <Sparkles />}</span>
+            </button>
           </div>
 
           {mostrarFiltros && (
@@ -102,7 +101,7 @@ export default function Home() {
           />
         )}
 
-        {mostrarFormulario && (<MovieForm onAddMovie={agregarPelicula} />)}
+        {mostrarFormulario && (<MovieForm onAddMovie={agregarPelicula} onCancel={() => setMostrarFormulario(false)} />)}
       </header> 
 
       <div className={styles.carteleraPeliculas}>
@@ -120,8 +119,7 @@ export default function Home() {
         )}
       </div>
 
-      <button onClick={showAddMovieForm} className={styles.agregarPelicula}> {mostrarFormulario  ? "Cancelar" : <><Plus /> Agregar Película / Serie</>}</button>
-
+      <button onClick={showAddMovieForm} className={styles.agregarPelicula}> <><Plus /> Agregar Película / Serie</></button>
     </section>
   );
 }

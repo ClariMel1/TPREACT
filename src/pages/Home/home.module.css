@@ -8,6 +8,15 @@
     margin: 0 auto;
 }
 
+.icono {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  .rotado {
+    transform: rotate(180deg);
+  }
+
 .filtros{
     background-color: black; 
     border: none; 

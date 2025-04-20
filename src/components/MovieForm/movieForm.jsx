@@ -1,29 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Titulo from "../Title/title";
+import styles from './movieForm.module.css';
+import Dropdown from '../Dropdown/dropdown';
+import Input from '../Input/input';
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { movieFormSchema } from "../../validations/movieValidations";
+
+import {X, Clapperboard} from 'lucide-react';
 
 export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo = "agregar" , onCancel}) {
-  const [showForm, setShowForm] = useState(true);
-  
-  const [titulo, setTitulo] = useState(initialData.titulo || "");
-  const [director, setDirector] = useState(initialData.director || "");
-  const [anio, setAno] = useState(initialData.anio || "");
-  const [genero, setGenero] = useState(initialData.genero || "");
-  const [rating, setRating] = useState(initialData.rating || "");
-  const [tipo, setTipo] = useState(initialData.tipo || "película");
-  const [imagen, setImagen] = useState(initialData.imagen || "");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(movieFormSchema),
+    defaultValues: initialData,
+  });
+
+  const [showForm, setShowForm] = useState(true);
+  const [genero, setGenero] = useState(initialData.genero || "");
+  const [tipo, setTipo] = useState(initialData.tipo || "película");
+
+
+  useEffect(() => {
+    if (showForm) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = ''; 
+    };
+  }, [showForm]);
+
+ const onFormSubmit = (data) => {
   
     const nuevaPelicula = {
       id: initialData.id || Date.now(), 
-      titulo,
-      director,
-      anio,
+      ...data,
       genero,
-      rating,
       tipo,
-      imagen,
       vista: initialData.vista || false 
     };
 
@@ -44,61 +60,28 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
   if (!showForm) return null;
 
   return (
-    <form onSubmit={handleSubmit}>
-       <Titulo texto={modo === "editar" ? "Editar" : "Agregar a la coleccion"} />
-      
-      <div className="mb-3">
-        <label htmlFor="titulo" className="block">Título:</label>
-        <input id="titulo" type="text" value={titulo} onChange={(e) => setTitulo(e.target.value)} required/>
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
+        <button className={styles.botonCerrar} type="button" onClick={handleCancel}>  <X /> </button>
+        <form className={styles.formulario} onSubmit={handleSubmit(onFormSubmit)}>
+          <Titulo className={styles.titulo} texto={modo === "editar" ? "Editar" : <>Agregar a la colección <Clapperboard /></>} />
+
+          <div className={styles.filaForm1}>
+            <Input id="titulo" type="text" placeholder="Título de la película o serie" label="Título" register={register} error={errors.titulo}/>
+            <Input id="director" type="text"  placeholder="Director de la película o serie" label="Director" register={register} error={errors.director}/>
+            <Input id="anio" type="number"  placeholder="Año de estreno" label="Año" register={register} error={errors.anio}/>
+            <Input id="rating" type="number" min="1" max="5" placeholder="Calificación del 1 al 5" label="Rating" register={register} error={errors.rating}/>
+          </div>
+
+          <div className={styles.filaForm2}>
+            <Input className={styles.input} id="imagen" type="url" placeholder="https://ejemplo.com/imagen.jpg" label="URL de Imagen" required={true} register={register} error={errors.imagen} />
+            <Dropdown   className={styles.dropdown} value={genero} options={['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción']} defaultOption="Seleccionar género" onChange={(val) => setGenero(val)} />
+            <Dropdown   className={styles.dropdown}  value={tipo} options={['película', 'serie']} defaultOption="Seleccionar tipo" onChange={(val) => setTipo(val)} />
+          </div>
+
+          <button className={styles.botonEnviar} type="submit"> {modo === "editar" ? "Guardar Cambios" : "Agregar"} </button>
+        </form>
       </div>
-
-      <div className="mb-3">
-        <label htmlFor="director" className="block">Director:</label>
-        <input id="director" type="text" value={director} onChange={(e) => setDirector(e.target.value)}required/>
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="anio" className="block">Año:</label>
-        <input id="anio" type="number" value={anio} onChange={(e) => setAno(e.target.value)} required/>
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="genero" className="block">Género:</label>
-        <select id="genero"value={genero} onChange={(e) => setGenero(e.target.value)}required>
-          <option value="">Seleccionar Género</option>
-          <option value="Acción">Acción</option>
-          <option value="Comedia">Comedia</option>
-          <option value="Drama">Drama</option>
-          <option value="Terror">Terror</option>
-          <option value="Ciencia Ficción">Ciencia Ficción</option>
-        </select>
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="rating" className="block">Rating:</label>
-        <input id="rating" type="number" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} required />
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="tipo" className="block">Tipo:</label>
-        <select id="tipo" value={tipo} onChange={(e) => setTipo(e.target.value)}>
-          <option value="película">Película</option>
-          <option value="serie">Serie</option>
-        </select>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="imagen" className="block">URL de Imagen:</label>
-        <input id="imagen" type="url" value={imagen} onChange={(e) => setImagen(e.target.value)} placeholder="https://ejemplo.com/imagen.jpg" />
-      </div>
-
-
-      <button type="submit">
-        {modo === "editar" ? "Guardar Cambios" : "Agregar"}
-      </button>
-      <button type="button" onClick={handleCancel}>
-        Cancelar
-      </button>
-
-    </form>
+    </div>
   );
 }

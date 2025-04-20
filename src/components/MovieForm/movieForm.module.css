@@ -1,0 +1,99 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* fondo oscurecido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500;
+    backdrop-filter: blur(2px); /* difumina un poco el fondo */
+  }
+  
+  .modal {
+    position: relative;
+    background-color: black;
+    padding: 2rem;
+    border-radius: 3rem;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    animation: aparecer 0.3s ease-out;
+  }
+
+  .titulo{
+    padding-bottom: 30px;
+  }
+  .botonCerrar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white; /* o el color que combine con tu modal */
+  }
+  
+  .botonEnviar {
+    background-color: none;
+    padding: 0.75rem 2rem;
+    border: 1px solid white;
+    border-radius: 3rem;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 1rem auto 0;
+    display: block; /* hace que funcione margin auto para centrar */
+  }
+
+  
+  @keyframes aparecer {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+.formulario{
+  max-width: 100%;
+  margin: 0 auto; 
+  padding:2rem; 
+}
+
+.filaForm1{
+  margin-top: 30px;
+}
+.filaForm1, .filaForm2 {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.filaForm1 > * {
+  flex: 1 1 calc(25% - 1rem); /* 4 inputs por fila */
+  min-width: 180px;
+}
+
+.filaForm2 > * {
+  flex: 1 1 calc(30% - 1rem); /* 3 elementos por fila */
+}
+
+.dropdown {
+  flex: 1 1 calc(33.33% - 1rem); 
+  min-width: 250px;
+  left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.filaForm2 > .dropdown {
+  flex: 1;
+}

@@ -1,30 +1,26 @@
 import { useState, useEffect } from 'react';
 
-export default function useWatchList(key, initialValue) {
-  const [storedValue, setStoredValue] = useState(() => {
+const useWatchList = (key, defaultValue) => {
+  const [items, setItems] = useState(() => {
     try {
-      const item = window.localStorage.getItem(key);
-      if (item) {
-        return JSON.parse(item);
-      }
-      return initialValue;
+      const savedItems = localStorage.getItem(key);
+
+      return savedItems ? JSON.parse(savedItems) : defaultValue;
     } catch (error) {
-      console.error("Error al obtener el item de localStorage", error);
-      return initialValue;
+ 
+      console.error('Error al obtener datos de localStorage:', error);
+      return defaultValue;
     }
   });
 
-  const setValue = (value) => {
+  useEffect(() => {
     try {
-      setStoredValue(value);
-      if (value !== undefined) {
-        window.localStorage.setItem(key, JSON.stringify(value));
-      }
+      localStorage.setItem(key, JSON.stringify(items));
     } catch (error) {
-      console.error("Error al guardar el item en localStorage", error);
+      console.error('Error al guardar datos en localStorage:', error);
     }
-  };
+  }, [key, items]);
+  return [items, setItems];
+};
 
-  return [storedValue, setValue];
-}
-
+export default useWatchList;

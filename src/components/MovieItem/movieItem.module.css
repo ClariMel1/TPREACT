@@ -2,11 +2,18 @@
     position:relative;
     overflow: hidden;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
-    transition: box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1rem;
 }
 
 .movie:hover {
+    transform: scale(1.03);
     box-shadow:0 40px 40px rgba(0, 0, 0, 0.15); /* un poco más intensa al pasar el mouse */
+}
+
+.noHover:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 .movieImage{
@@ -17,12 +24,19 @@
    border-top-right-radius: 1rem;
 }
 
-.infoMovie{
+.movieInfo{
     text-align: left;
     background-color: black;
     border-bottom-left-radius: 1rem ;
     border-bottom-right-radius: 1rem ;
     padding: 1rem 2rem;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem; /* espacio entre estrella y año */
 }
 
 .botonAccion {
