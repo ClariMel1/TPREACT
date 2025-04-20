@@ -10,6 +10,7 @@ export default function MovieItem({ movie, onToggleVista, onDelete, onEdit }) {
   return (
     <div className={`${styles.movie} ${editando ? styles.noHover : ""}`}>
       <img src={movie.imagen} alt={`Imagen de ${movie.titulo}`} className={styles.movieImage} />
+
       <div className={styles.movieInfo}>
         <Titulo className={styles.titulo} texto={movie.titulo}></Titulo>
 
@@ -18,11 +19,10 @@ export default function MovieItem({ movie, onToggleVista, onDelete, onEdit }) {
           <p> <Star /> {movie.rating}</p>
           <p>{movie.anio}</p>
         </div>
-        
-        <button className={`${styles.botonAccion} ${styles.eliminar}`} onClick={() => onDelete(movie.id)}><CircleX /></button>
-        <button className={`${styles.botonAccion} ${styles.editar}`} onClick={() => setEditando(true)}><Pencil /></button>
-        <button className={`${styles.botonAccion} ${styles.visto}`} onClick={() => onToggleVista(movie.id)}>{movie.vista ? <Eye /> : <EyeClosed />}</button>
       </div>
+      <button className={`${styles.botonAccion} ${styles.eliminar}`} onClick={() => onDelete(movie.id)}><CircleX /></button>
+      <button className={`${styles.botonAccion} ${styles.editar}`} onClick={() => setEditando(true)}><Pencil /></button>
+      <button className={`${styles.botonAccion} ${styles.visto}`} onClick={() => onToggleVista(movie.id)}>{movie.vista ? <Eye /> : <EyeClosed />}</button>
 
       {editando && (
         <MovieForm

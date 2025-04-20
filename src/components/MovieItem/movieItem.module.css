@@ -1,14 +1,16 @@
 .movie{
     position:relative;
+    background-color: white;
     overflow: hidden;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 1rem;
+    border-radius: 1rem;
+    height: 560px;
 }
 
 .movie:hover {
     transform: scale(1.03);
-    box-shadow:0 40px 40px rgba(0, 0, 0, 0.15); /* un poco más intensa al pasar el mouse */
+    box-shadow:0 40px 40px rgba(0, 0, 0, 0.15); 
 }
 
 .noHover:hover {
@@ -25,18 +27,28 @@
 }
 
 .movieInfo{
-    text-align: left;
-    background-color: black;
-    border-bottom-left-radius: 1rem ;
-    border-bottom-right-radius: 1rem ;
-    padding: 1rem 2rem;
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+  
+    background: linear-gradient(transparent, black 20%);
+    color: white;
+
+    padding: 50px 20px 0 ;
+
+
+    align-items: flex-start;  /* ✅ Alinea los elementos a la izquierda */
+    text-align: left;  
+
+    z-index: 10;
+    height:200px;
 }
 
 .info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 1rem; /* espacio entre estrella y año */
+    gap: 1rem;
 }
 
 .botonAccion {
