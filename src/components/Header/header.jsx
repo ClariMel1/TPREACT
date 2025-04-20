@@ -14,6 +14,8 @@ const Header = ({
   genero,
   tipo,
   orden,
+  vista,
+  setVista,
   setGenero,
   setTipo,
   setOrden,
@@ -35,6 +37,8 @@ const Header = ({
               generoSeleccionado={genero}
               tipoSeleccionado={tipo}
               ordenSeleccionado={orden}
+              vistoSeleccionado={vista}
+              onVistaChange={setVista}
               onGeneroChange={setGenero}
               onTipoChange={setTipo}
               onOrdenChange={setOrden}

@@ -11,7 +11,6 @@ import { Plus } from 'lucide-react';
 export default function Home() {
     const [peliculas, setPeliculas] = useWatchList('peliculas', []);
 
-
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [mostrarFiltros, setMostrarFiltros] = useState(false);
     const [animandoSalida, setAnimandoSalida] = useState(false)
@@ -20,6 +19,7 @@ export default function Home() {
     const [orden, setOrden] = useState("");
     const [genero, setGenero] = useState("");
     const [tipo, setTipo] = useState("");
+    const [vista, setVista] = useState("");
 
     const showAddMovieForm = () => {
       setMostrarFormulario(prev => !prev);
@@ -32,21 +32,26 @@ export default function Home() {
     };
     
     const handleSearchChange = (value) => {
-        setSearchTerm(value);
+      setSearchTerm(value);
     };
 
   
     const filteredPeliculas = peliculas
-    .filter((pelicula) =>
-      pelicula.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pelicula.director.toLowerCase().includes(searchTerm.toLowerCase()))
-    .filter((pelicula) => !genero || pelicula.genero === genero)
-    .filter((pelicula) => !tipo || pelicula.tipo === tipo)
-    .sort((a, b) => {
-      if (orden === "anio-asc") return a.anio - b.anio;
-      if (orden === "anio-desc") return b.anio - a.anio;
-      if (orden === "rating-asc") return a.rating - b.rating;
-      if (orden === "rating-desc") return b.rating - a.rating;
+      .filter((pelicula) =>
+        pelicula.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        pelicula.director.toLowerCase().includes(searchTerm.toLowerCase()))
+      .filter((pelicula) => !genero || pelicula.genero === genero)
+      .filter((pelicula) => {
+        if (vista === "Vistas") return pelicula.vista === true;
+        if (vista === "No vistas") return pelicula.vista === false;
+        return true;
+      })
+      .filter((pelicula) => !tipo || pelicula.tipo === tipo)
+        .sort((a, b) => {
+          if (orden === "anio-asc") return a.anio - b.anio;
+          if (orden === "anio-desc") return b.anio - a.anio;
+          if (orden === "rating-asc") return a.rating - b.rating;
+          if (orden === "rating-desc") return b.rating - a.rating;
       return 0;
     });
 
@@ -75,6 +80,7 @@ export default function Home() {
       setGenero(''); 
       setTipo('');
       setOrden('');
+      setVista('');
     };
 
 
@@ -102,6 +108,8 @@ export default function Home() {
         genero={genero}
         tipo={tipo}
         orden={orden}
+        vista={vista}
+        setVista={setVista}      
         setGenero={setGenero}
         setTipo={setTipo}
         setOrden={setOrden}

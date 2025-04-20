@@ -8,6 +8,8 @@ export default function Filter({
   onGeneroChange,
   onTipoChange,
   onOrdenChange,
+  vistoSeleccionado,
+  onVistaChange
 }) {
   return (
     <div className={styles.filtros}>
@@ -21,6 +23,7 @@ export default function Filter({
           { label: 'Rating ↓', value: 'rating-desc' },
         ]}
         defaultOption="Ordenar por" onChange={onOrdenChange}/>
+      <Dropdown label='Visto' value={vistoSeleccionado} options={['Vistas', 'No vistas']} defaultOption='Todas' onChange={onVistaChange}/>
     </div>
   );
 }

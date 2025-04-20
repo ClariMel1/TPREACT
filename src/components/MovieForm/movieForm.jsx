@@ -20,7 +20,8 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
 
   const [showForm, setShowForm] = useState(true);
   const [genero, setGenero] = useState(initialData.genero || "");
-  const [tipo, setTipo] = useState(initialData.tipo || "película");
+  const [tipo, setTipo] = useState(initialData.tipo || "");
+  const [vista, setVista] = useState( initialData.vista !== undefined ? initialData.vista : false );
 
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
       ...data,
       genero,
       tipo,
-      vista: initialData.vista || false 
+      vista
     };
 
     if (modo === "editar" && onSubmit) {
@@ -81,6 +82,7 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
             <Input className={styles.input} id="imagen" type="url" placeholder="https://ejemplo.com/imagen.jpg" label="URL de Imagen" required={true} register={register} error={errors.imagen} />
             <Dropdown   className={styles.dropdown} value={genero} options={['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción']} defaultOption="Seleccionar género" onChange={(val) => setGenero(val)} />
             <Dropdown   className={styles.dropdown}  value={tipo} options={['película', 'serie']} defaultOption="Seleccionar tipo" onChange={(val) => setTipo(val)} />
+            <Dropdown   className={styles.dropdown} value={vista ? 'Vista' : 'No vista'} options={['Vista', 'No vista']} defaultOption="Seleccionar estado" onChange={(val) => setVista(val === 'Vista')}/>   
           </div>
 
           <button className={styles.botonEnviar} type="submit"> {modo === "editar" ? "Guardar Cambios" : "Agregar"} </button>
