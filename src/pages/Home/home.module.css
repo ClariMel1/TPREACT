@@ -1,36 +1,11 @@
-.buscaAgrega {
-    display: flex;
-    justify-content: center; 
-    align-items: center;    
-    gap: 1px;               
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.icono {
-    display: inline-block;
-    transition: transform 0.3s ease;
-  }
-  
-  .rotado {
-    transform: rotate(180deg);
-  }
-
-.filtros{
+html, body {
+    height: 500px;
+    margin: 0;
     background-color: black; 
-    border: none; 
-    outline: none;
-    padding: 10px 15px; 
-    font-size: 16px; 
-    color: white;
-    width: 100%; 
-    max-width: 4rem; 
-    border-radius: 3rem; 
 }
 
 .carteleraPeliculas{
-    margin: 235px auto 0 auto;
+    margin: 240px auto 0 auto;
     max-width: 80%;
 
     display: flex;
@@ -40,6 +15,10 @@
     text-align: center;
 }
 
+.aviso{
+    margin: 200px 0 auto;
+    font-size: 20px;
+}
 .agregarPelicula {
     position: fixed;
     bottom: 20px;

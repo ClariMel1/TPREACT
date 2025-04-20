@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import styles from './home.module.css';
+import Header from '../../components/Header/header';
 
-import Titulo from '../../components/Title/title';
 import MovieForm from '../../components/MovieForm/movieForm';
 import MovieList from '../../components/MovieList/movieList';
 import useWatchList from '../../hooks/useWatchList';
-import MovieCounter from '../../components/MovieCounter/movieCounter';
-import Search from '../../components/Search/Search';
-import Filter from '../../components/Filters/filter';
 
-import { Sparkles, X, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 export default function Home() {
     const [peliculas, setPeliculas] = useWatchList('peliculas', []);
@@ -17,6 +14,7 @@ export default function Home() {
 
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [mostrarFiltros, setMostrarFiltros] = useState(false);
+    const [animandoSalida, setAnimandoSalida] = useState(false)
 
     const [searchTerm, setSearchTerm] = useState(""); 
     const [orden, setOrden] = useState("");
@@ -27,15 +25,12 @@ export default function Home() {
       setMostrarFormulario(prev => !prev);
     };
 
-    const toggleFiltros = () => {
-      setMostrarFiltros(prevState => !prevState);
-    };
-
     const agregarPelicula = (pelicula) => {
+      console.log("Película agregada: ", pelicula);
       setPeliculas([...peliculas, pelicula]);
       setMostrarFormulario(false);
     };
-
+    
     const handleSearchChange = (value) => {
         setSearchTerm(value);
     };
@@ -76,50 +71,60 @@ export default function Home() {
       );
     };
 
+    const limpiarFiltros = () => {
+      setGenero(''); 
+      setTipo('');
+      setOrden('');
+    };
+
+
+    const toggleFiltros = () => {
+      if (mostrarFiltros) {
+        setAnimandoSalida(true);
+        limpiarFiltros();
+        setTimeout(() => {
+          setMostrarFiltros(false);
+          setAnimandoSalida(false);
+        }, 300);
+      } else {
+        setMostrarFiltros(true);
+      }
+    };
+    
 
   return (
-    <section>
-      <header className="header fixed-top bg-dark bg-opacity-75 text-white shadow-lg p-4">
-        <Titulo texto={"Series y Peliculas"}/>
-        <MovieCounter peliculas={peliculas} />
-
-          <div className={styles.buscaAgrega}>
-            <Search searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-            <button onClick={toggleFiltros} className={styles.filtros}>
-              <span className={`${styles.icono} ${mostrarFiltros ? styles.rotado : ''}`}>{mostrarFiltros ? <X /> : <Sparkles />}</span>
-            </button>
-          </div>
-
-          {mostrarFiltros && (
-          <Filter
-            generoSeleccionado={genero}
-            tipoSeleccionado={tipo}
-            ordenSeleccionado={orden}
-            onGeneroChange={setGenero}
-            onTipoChange={setTipo}
-            onOrdenChange={setOrden}
-          />
-        )}
-
-        {mostrarFormulario && (<MovieForm onAddMovie={agregarPelicula} onCancel={() => setMostrarFormulario(false)} />)}
-      </header> 
+    <section className={styles.base}>
+      <Header
+        searchTerm={searchTerm}
+        handleSearchChange={handleSearchChange}
+        mostrarFiltros={mostrarFiltros}
+        animandoSalida={animandoSalida}
+        genero={genero}
+        tipo={tipo}
+        orden={orden}
+        setGenero={setGenero}
+        setTipo={setTipo}
+        setOrden={setOrden}
+        toggleFiltros={toggleFiltros}
+      />
 
       <div className={styles.carteleraPeliculas}>
-
         {peliculas.length === 0 ? (
-          <p>No hay películas ni series aún.</p>
+          <p className={styles.aviso}>No hay películas ni series aún.</p>
             ) : filteredPeliculas.length === 0 ? (
-          <p>No se encontraron resultados.</p>
+          <p className={styles.aviso}>No se encontraron resultados.</p>
             ) : (
           <MovieList 
             movies={filteredPeliculas}
             onToggleVista={onToggleVista}
             onDeleteMovie={eliminarPelicula}
             onEditMovie={editarPelicula}/>
-        )}
+          )}
       </div>
 
-      <button onClick={showAddMovieForm} className={styles.agregarPelicula}> <><Plus /> Agregar Película / Serie</></button>
+      <button onClick={showAddMovieForm} className={styles.agregarPelicula}> <><Plus /> Agregar Película / Serie</> </button>
+      {mostrarFormulario && ( <MovieForm onAddMovie={agregarPelicula} onCancel={() => setMostrarFormulario(false)}/>)}
+
     </section>
   );
 }

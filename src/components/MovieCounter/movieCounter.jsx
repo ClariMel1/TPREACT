@@ -1,13 +1,14 @@
 import styles from './movieCounter.module.css';
 
-export default function MovieCounter({ peliculas }) {
-    // Función para contar el total por género
+export default function MovieCounter({ peliculas = [] }) {
     const contarPorGenero = (genero) => {
-        return peliculas.filter(pelicula => pelicula.genero === genero).length;
+        return peliculas.filter(p => p.genero === genero).length;
     };
 
-    // Contadores totales
     const totalPeliculas = peliculas.length;
+    const totalVistas = peliculas.filter(p => p.vista).length;
+    const totalNoVistas = totalPeliculas - totalVistas;
+
     const totalAccion = contarPorGenero("Acción");
     const totalComedia = contarPorGenero("Comedia");
     const totalDrama = contarPorGenero("Drama");
@@ -17,6 +18,8 @@ export default function MovieCounter({ peliculas }) {
     return (
         <div className={styles.contador}>
             <p>Total de Películas y Series: {totalPeliculas}</p>
+            <p>Vistas: {totalVistas}</p>
+            <p>No vistas: {totalNoVistas}</p>
             <p>Acción: {totalAccion}</p>
             <p>Comedia: {totalComedia}</p>
             <p>Drama: {totalDrama}</p>
@@ -25,3 +28,4 @@ export default function MovieCounter({ peliculas }) {
         </div>
     );
 }
+

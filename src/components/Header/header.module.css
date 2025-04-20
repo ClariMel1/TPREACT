@@ -1,0 +1,73 @@
+.header{
+    background-image: url('/imagenes/telon.jpg');
+    background-size: cover;
+    background-position: center 23%;
+    background-repeat: no-repeat;
+    height: 220px; /* o lo que necesites */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030; /* valor alto para que esté por encima de otros elementos */
+  
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); /* similar a shadow-lg */
+    
+    padding: 1.5rem; /* equivalente a p-4 */
+}
+
+.buscaFiltra {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 5px; 
+    position: relative; 
+    flex-wrap: wrap; 
+}
+
+.filtrosOcultos {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none; /* Para que no se pueda hacer clic mientras está oculto */
+}
+  
+  /* Cuando está visible */
+  .filtrosVisibles {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.filtrosSalida {
+    opacity: 0;
+    transform: translateX(-30px); /* se va a la derecha */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+
+.icono {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  .rotado {
+    transform: rotate(180deg);
+}
+
+.filtroIcono{
+    background-color: black; 
+    border: none; 
+    outline: none;
+    padding: 10px 15px; 
+    font-size: 16px; 
+    color: white;
+    width: 100%; 
+    max-width: 4rem; 
+    border-radius: 3rem; 
+}

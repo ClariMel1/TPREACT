@@ -13,7 +13,8 @@ import {X, Clapperboard} from 'lucide-react';
 export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo = "agregar" , onCancel}) {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(movieFormSchema),
+    // Elimina la validación de yup temporalmente
+    // resolver: yupResolver(movieFormSchema),
     defaultValues: initialData,
   });
 
@@ -54,7 +55,10 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
 
   const handleCancel = () => {
     setShowForm(false);
-    if (onCancel) onCancel(); 
+    if (onCancel) onCancel();
+    // Reiniciar los valores del formulario al cancelar
+    setGenero('');
+    setTipo('película');
   };
 
   if (!showForm) return null;

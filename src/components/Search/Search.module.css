@@ -1,16 +1,20 @@
 .buscadorContenedor {
-    margin: 0 auto;
+    margin: 0;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    width: 100%; 
-    /**border:black solid 1px;*/
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+  max-width: 600px; 
+
     border-radius: 3rem;
     background-color: lavender;
 
-    flex: 1; /* Para que ocupe el espacio disponible */
-    max-width: 400px; /* Limita el tamaño del input */
+    padding:1px;
+    gap: 0.5rem;
 }
+
+
   
 .buscador {
     background-color: transparent; 
@@ -20,7 +24,7 @@
     font-size: 16px; 
     color: white;
     width: 100%; 
-    max-width: 500px; 
+    max-width: 600px; 
     border-radius: 20px; 
 }
   
