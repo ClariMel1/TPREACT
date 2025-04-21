@@ -8,12 +8,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { movieFormSchema } from "../../validations/movieValidations";
 
-import {X, Clapperboard} from 'lucide-react';
+import {X} from 'lucide-react';
 
 export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo = "agregar" , onCancel}) {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
-    // Elimina la validación de yup temporalmente
+    // Elimina la validación de yup temporalmente porque no me anda y no entiendo bn como funciona
     // resolver: yupResolver(movieFormSchema),
     defaultValues: initialData,
   });
@@ -22,6 +22,8 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
   const [genero, setGenero] = useState(initialData.genero || "");
   const [tipo, setTipo] = useState(initialData.tipo || "");
   const [vista, setVista] = useState( initialData.vista !== undefined ? initialData.vista : false );
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+
 
 
   useEffect(() => {
@@ -57,7 +59,6 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
   const handleCancel = () => {
     setShowForm(false);
     if (onCancel) onCancel();
-    // Reiniciar los valores del formulario al cancelar
     setGenero('');
     setTipo('película');
   };
@@ -69,20 +70,25 @@ export default function MovieForm({onAddMovie , onSubmit, initialData = {}, modo
       <div className={styles.modal}>
         <button className={styles.botonCerrar} type="button" onClick={handleCancel}>  <X /> </button>
         <form className={styles.formulario} onSubmit={handleSubmit(onFormSubmit)}>
-          <Titulo className={styles.titulo} texto={modo === "editar" ? "Editar" : <>Agregar a la colección <Clapperboard /></>} />
+          <Titulo className={styles.titulo} texto={modo === "editar" ? "Editar" : "Agregar nueva pelicula o serie" } />
 
           <div className={styles.filaForm1}>
-            <Input id="titulo" type="text" placeholder="Título de la película o serie" label="Título" register={register} error={errors.titulo}/>
-            <Input id="director" type="text"  placeholder="Director de la película o serie" label="Director" register={register} error={errors.director}/>
-            <Input id="anio" type="number"  placeholder="Año de estreno" label="Año" register={register} error={errors.anio}/>
-            <Input id="rating" type="number" min="1" max="5" placeholder="Calificación del 1 al 5" label="Rating" register={register} error={errors.rating}/>
+            <Input className={`${styles.input}`} id="titulo" type="text" placeholder="Título de la película o serie" label="Título" register={register} error={errors.titulo}/>
+            <Input className={`${styles.input}`} id="director" type="text"  placeholder="Director de la película o serie" label="Director" register={register} error={errors.director}/>
+            <Input  className={`${styles.inputSmall}`} id="anio" type="number"  placeholder="Año de estreno" label="Año" register={register} error={errors.anio}/>
           </div>
 
           <div className={styles.filaForm2}>
             <Input className={styles.input} id="imagen" type="url" placeholder="https://ejemplo.com/imagen.jpg" label="URL de Imagen" required={true} register={register} error={errors.imagen} />
-            <Dropdown   className={styles.dropdown} value={genero} options={['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción']} defaultOption="Seleccionar género" onChange={(val) => setGenero(val)} />
-            <Dropdown   className={styles.dropdown}  value={tipo} options={['película', 'serie']} defaultOption="Seleccionar tipo" onChange={(val) => setTipo(val)} />
-            <Dropdown   className={styles.dropdown} value={vista ? 'Vista' : 'No vista'} options={['Vista', 'No vista']} defaultOption="Seleccionar estado" onChange={(val) => setVista(val === 'Vista')}/>   
+            <Input className={styles.rating} id="rating" type="number" min="1" max="5" placeholder="Calificación del 1 al 5" label="Rating" register={register} error={errors.rating}/>
+          </div>
+
+          <div className={styles.filaForm3}>
+          <Dropdown className={styles.dropdown} value={genero} options={['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción']} defaultOption="Seleccionar género" onChange={(val) => setGenero(val)} isOpen={openDropdownId === 'genero'} setOpenDropdown={() => setOpenDropdownId(openDropdownId === 'genero' ? null : 'genero')} />
+  
+  <Dropdown className={styles.dropdown} value={tipo} options={['película', 'serie']} defaultOption="Seleccionar tipo" onChange={(val) => setTipo(val)} isOpen={openDropdownId === 'tipo'} setOpenDropdown={() => setOpenDropdownId(openDropdownId === 'tipo' ? null : 'tipo')} />
+  
+  <Dropdown className={styles.dropdown} value={vista ? 'Vista' : 'No vista'} options={['Vista', 'No vista']} defaultOption="Seleccionar estado" onChange={(val) => setVista(val === 'Vista')} isOpen={openDropdownId === 'vista'} setOpenDropdown={() => setOpenDropdownId(openDropdownId === 'vista' ? null : 'vista')} />
           </div>
 
           <button className={styles.botonEnviar} type="submit"> {modo === "editar" ? "Guardar Cambios" : "Agregar"} </button>

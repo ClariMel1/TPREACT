@@ -24,7 +24,7 @@ const Header = ({
 }) => {
   return (
     <header className={styles.header}>
-      <Titulo texto={"Popcorn Movies Club"} />
+      <Titulo texto={"POPCORN & CINE"} />
       <MovieCounter peliculas={peliculas} />
 
       <div className={styles.buscaFiltra}>

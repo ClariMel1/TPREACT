@@ -42,8 +42,22 @@
     border-radius: 5px;
     max-height: 500px;
     overflow-y: auto;
+
+
+    overflow: hidden;
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: all 0.3s ease-in-out;
 }
-  
+
+.dropdownMenu.closed {
+    max-height: 0;
+    opacity: 0;
+    transform: scaleY(0.95);
+    pointer-events: none;
+}
+
 .dropdownMenu li {
     padding: 10px;
     cursor: pointer;

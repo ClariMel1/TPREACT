@@ -1,9 +1,5 @@
 .header{
-    background-image: url('/imagenes/telon.jpg');
-    background-size: cover;
-    background-position: center 23%;
-    background-repeat: no-repeat;
-    height: 220px; /* o lo que necesites */
+    height: 220px; 
     color: white;
     display: flex;
     flex-direction: column;
@@ -15,11 +11,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1030; /* valor alto para que esté por encima de otros elementos */
+    z-index: 1030; 
   
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); /* similar a shadow-lg */
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); 
     
-    padding: 1.5rem; /* equivalente a p-4 */
+    padding: 1.5rem; 
+
+    background: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
+  backdrop-filter: blur(10px);
 }
 
 .buscaFiltra {
@@ -35,7 +34,7 @@
     opacity: 0;
     transform: translateX(-30px);
     transition: opacity 0.5s ease, transform 0.5s ease;
-    pointer-events: none; /* Para que no se pueda hacer clic mientras está oculto */
+    pointer-events: none; 
 }
   
   /* Cuando está visible */
@@ -47,7 +46,7 @@
 
 .filtrosSalida {
     opacity: 0;
-    transform: translateX(-30px); /* se va a la derecha */
+    transform: translateX(-30px);
     transition: opacity 0.5s ease, transform 0.5s ease;
     pointer-events: none;
   }

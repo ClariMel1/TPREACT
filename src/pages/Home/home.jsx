@@ -114,6 +114,7 @@ export default function Home() {
         setTipo={setTipo}
         setOrden={setOrden}
         toggleFiltros={toggleFiltros}
+        peliculas={filteredPeliculas} 
       />
 
       <div className={styles.carteleraPeliculas}>

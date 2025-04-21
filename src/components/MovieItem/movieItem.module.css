@@ -1,16 +1,19 @@
 .movie{
     position:relative;
-    background-color: white;
     overflow: hidden;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 1rem;
-    height: 560px;
+    width: 300px; 
+    height: 550px;
+    z-index: 900px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); 
+    margin-bottom: 40px;
 }
 
 .movie:hover {
-    transform: scale(1.03);
-    box-shadow:0 40px 40px rgba(0, 0, 0, 0.15); 
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #000;
+    transform: scale(1.1);
 }
 
 .noHover:hover {
@@ -31,18 +34,13 @@
     bottom: 0; 
     left: 0;
     width: 100%;
-  
-    background: linear-gradient(transparent, black 20%);
+    background: linear-gradient(to bottom, transparent, black 50%);
     color: white;
-
-    padding: 50px 20px 0 ;
-
-
-    align-items: flex-start;  /* ✅ Alinea los elementos a la izquierda */
+    padding: 160px 20px 0 ;
+    align-items: flex-start; 
     text-align: left;  
 
-    z-index: 10;
-    height:200px;
+    height:330px;
 }
 
 .info {
@@ -53,10 +51,24 @@
 
 .botonAccion {
     position: absolute;
-    background: none;
+    background-color: rgba(255, 255, 255, 0.048); 
     border: none;
     cursor: pointer;
-    height: 50px;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); 
+}
+
+.botonAccion:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #000;
+    transform: scale(1.1); 
 }
 
 .eliminar {
@@ -71,7 +83,7 @@
   
 .visto {
     top: 0.5rem;
-    right: 2.5rem;
+    right: 3rem;
 }
   
 

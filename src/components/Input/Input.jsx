@@ -14,7 +14,7 @@ export default function Input({ id, type = "text", value, onChange, placeholder,
         min={min}
         max={max}
       />
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} >{label}</label>
       {error && <p className={styles.errorMessage}>{error.message}</p>}
     </div>
   );

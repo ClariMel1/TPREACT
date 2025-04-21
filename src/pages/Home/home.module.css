@@ -1,7 +1,8 @@
 html, body {
     height: 500px;
     margin: 0;
-    background-color: black; 
+    background-color: rgb(10, 10, 10); 
+    font-family: "Montserrat", sans-serif;
 }
 
 .carteleraPeliculas{
@@ -16,10 +17,13 @@ html, body {
 }
 
 .aviso{
+    font-family: "Pinyon Script", cursive;
+    letter-spacing: 2px;
     margin: 200px 0 auto;
-    font-size: 20px;
+    font-size: 50px;
 }
 .agregarPelicula {
+    z-index: 1500px;
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -31,7 +35,7 @@ html, body {
     color: white;
     width: 100%; 
     padding: 20px;
-    max-width: 250px; 
+    max-width: 300px; 
     border-top-left-radius: 3rem;
     border-top-right-radius: 3rem;
     border-bottom-left-radius: 3rem;

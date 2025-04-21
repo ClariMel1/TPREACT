@@ -1,4 +1,9 @@
 .titulo {
     font-size: 2rem;
     color: #333;
-  }
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 839;
+    font-style: italic;
+    font-variation-settings: "wdth" 111.8,"YTLC" 500;
+}

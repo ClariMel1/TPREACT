@@ -1,15 +1,36 @@
+
+
 .input{
-    background: transparent;
-    border: 1px solid white;
     border-radius: 3rem;
-    place-content: white;
+
+    color: white;            
+    background-color: black; 
+    border: 1px solid white; 
+}
+  
+.input::placeholder {
+    color: white;
+}
+
+.input:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.534);
+}
+
+.inputContainer label {
+    color: rgba(255, 255, 255, 0.349); /* Color clarito para el label */
+    transition: all 0.3s ease;
+}
+  
+.input:focus ~ label {
+    color: white
 }
 
 .errorInput {
     border-color: red;
 }
   
-  .errorMessage {
+.errorMessage {
     color: red;
     font-size: 0.8rem;
     margin-top: 5px;
